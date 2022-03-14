@@ -32,6 +32,7 @@ export class TypeComponent implements OnInit {
     }).subscribe(respone => {
       alert("Type created successfully")
     })
+    this.typeForm.reset()
   }
 
   nameIsUnique(control: FormControl) : {[msg: string] : boolean} {

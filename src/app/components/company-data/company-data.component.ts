@@ -35,6 +35,7 @@ export class CompanyDataComponent implements OnInit {
       }).subscribe(
         response => console.log(response)
       )
+    this.companyForm.reset()
   }
 
   nameIsUnique(control: FormControl) : {[msg: string]: boolean} {
