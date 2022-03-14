@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Unit } from 'src/app/models/unit.model';
 import { UnitService } from 'src/app/Services/Unit/unit.service';
 
 @Component({
@@ -8,23 +10,38 @@ import { UnitService } from 'src/app/Services/Unit/unit.service';
 })
 export class UnitsComponent implements OnInit {
 
-  unit:any={
-    name:"",
-    Notes:""
-  }
-    constructor(private myService:UnitService) { }
+    units: Unit[]=[];
+    unitForm: FormGroup = new FormGroup({
+      'name': new FormControl(null, [Validators.required, this.nameIsRequired.bind(this)]),
+      'notes': new FormControl(null)
+    })
+    constructor(private unitService: UnitService) { }
 
     ngOnInit(): void {
+      this.unitService.getAll().subscribe(
+        data => {
+          this.units = data;
+          console.log(data)
+        }
+      )
     }
-
-    addUnit(){
-  this.myService.Insert(this.unit).subscribe();
-
-  this.unit.name=""
-  this.unit.Notes=""
-  }
-  Clear(){
-    this.unit.name=""
-  this.unit.Notes=""
-  }
+    saveUnit(){
+      if (this.unitForm.valid)
+        this.unitService.Insert({
+          id: 0,
+          name:this.unitForm.value.name,
+          notes: this.unitForm.value.notes
+        }).subscribe(
+          response => console.log(response)
+        )
+      this.unitForm.reset()
+    }
+    nameIsRequired(control:FormControl):{[msg:string]:boolean}{
+      for(let unit of this.units){
+      if(unit.name == control.value){
+      return {'exists': true}
+      }
+    }
+    return null;
+    }
 }
