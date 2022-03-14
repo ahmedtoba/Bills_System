@@ -42,9 +42,11 @@ export class SpeciesComponent implements OnInit {
         companyId: this.speciesForm.value.company,
         typeId: this.speciesForm.value.type
       }).subscribe(
-        response => console.log(response)
-      )
-    this.speciesForm.reset()
+        response => {
+          alert("Species Created Successfully");
+          console.log(response)
+        });
+      this.speciesForm.reset()
     }
   }
   typeIsUnique(control:FormControl):{[msg:string]:boolean}{

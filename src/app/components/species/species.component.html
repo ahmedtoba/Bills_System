@@ -43,7 +43,7 @@
                                                     <span class="text-danger ml-2 help-block" *ngIf="speciesForm.get('type').touched && speciesForm.get('type').hasError('required')">
                                               type name is required
                                             </span>
-                                                    <span class="text-danger ml-2 help-block" *ngIf="speciesForm.get('type').touched && speciesForm.get('type').hasError('exists')">
+                                                    <span class="text-danger ml-2 help-block" *ngIf="speciesForm.get('type').hasError('exists')">
                                               type name is exists
                                             </span>
                                                 </div>
