@@ -5,10 +5,10 @@ export class CompanyType {
    *
    */
   constructor(
-    public Id: number,
-    public Notes: string,
-    public CompanyId: number,
-    public TypeId: number,
+    public id: number,
+    public notes: string,
+    public companyId: number,
+    public typeId: number,
   ) {
 
   }
