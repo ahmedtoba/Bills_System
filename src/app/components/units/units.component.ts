@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UnitService } from 'src/app/Services/Unit/unit.service';
 
 @Component({
   selector: 'app-units',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnitsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  unit:any={
+    name:"",
+    Notes:""
   }
+    constructor(private myService:UnitService) { }
 
+    ngOnInit(): void {
+    }
+
+    addUnit(){
+  this.myService.Insert(this.unit).subscribe();
+
+  this.unit.name=""
+  this.unit.Notes=""
+  }
+  Clear(){
+    this.unit.name=""
+  this.unit.Notes=""
+  }
 }

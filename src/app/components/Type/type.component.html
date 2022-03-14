@@ -10,38 +10,28 @@
                       <div class="card">
                           <div class="card-header">
                               <div class="card-title-wrap bar-success">
-                                  <h4 class="card-title" id="horz-layout-basic">Units Form</h4>
+                                  <h4 class="card-title" id="horz-layout-basic">Type Form</h4>
                               </div>
                               <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
                           </div>
                           <div class="card-body">
                               <div class="px-3">
-                                  <form class="form form-horizontal">
+                                  <form class="form form-horizontal" >
 
                           <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">Unit Name : </label>
+                                              <label class="col-md-3 label-control" for="projectinput9">Type Name : </label>
                                               <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="name" [(ngModel)]="unit.name" >
+                                                  <input type="text" id="projectinput9" class="form-control" name="name" [(ngModel)]="type.Name">
                                               </div>
                                           </div>
 
-
-
-
-
-                                          <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">Notes: </label>
-                                              <div class="col-md-9">
-                                                  <textarea id="projectinput9" rows="5" class="form-control" name="comment" [(ngModel)]="unit.Notes"></textarea>
-                                              </div>
-                                          </div>
                                       </form></div>
 
                                       <div class="form-actions">
                                           <button type="button" class="btn btn-danger mr-1" (click)="Clear()">
                                               <i class="icon-trash"></i> Cancel
                                           </button>
-                                          <button type="button" class="btn btn-success" (click)="addUnit()">
+                                          <button type="button" class="btn btn-success" (click)="addType()">
                                               <i class="icon-note"></i> Save
                                           </button>
                                       </div>

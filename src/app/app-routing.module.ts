@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SalesReportComponent } from './components/sales-report/sales-report.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { SpeciesComponent } from './components/species/species.component';
+import { TypeComponent } from './components/Type/type.component';
 import { UnitsComponent } from './components/units/units.component';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path:"categories", component: CategoriesComponent},
   {path:"clients", component: ClientsComponent},
   {path:"company-data", component: CompanyDataComponent},
+  {path:"type", component: TypeComponent},
   {path:"login", component: LoginComponent},
   {path:"sales-report", component: SalesReportComponent},
   {path:"sales", component: SalesComponent},

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientService } from 'src/app/Services/Client/client.service';
+
+
 
 @Component({
   selector: 'app-clients',
@@ -7,9 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsComponent implements OnInit {
 
-  constructor() { }
+  client:any={
+    name:"",
+    phoneNumber:"",
+    address:"",
+    id:1
+  }
 
-  ngOnInit(): void {
+    constructor(private myService:ClientService) { }
+
+    ngOnInit(): void {
+    }
+
+    addClient(){
+
+ this.myService.Insert(this.client).subscribe();
+
+  this.client.name=""
+  this.client.phoneNumber=""
+  this.client.address=""
+  this.client.id+=1
+  }
+  Clear(){
+    this.client.name=""
+    this.client.phoneNumber=""
+    this.client.address=""
   }
 
 }
