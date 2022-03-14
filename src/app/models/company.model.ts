@@ -3,9 +3,9 @@
 export class Company {
 
   constructor(
-    public Id: number,
-    public Name: string,
-    public Notes: string
+    public id: number,
+    public name: string,
+    public notes: string
   ){}
 
 }

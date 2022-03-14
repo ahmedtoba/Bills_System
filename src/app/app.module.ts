@@ -16,7 +16,7 @@ import { SalesReportComponent } from './components/sales-report/sales-report.com
 import { SalesComponent } from './components/sales/sales.component';
 import { SpeciesComponent } from './components/species/species.component';
 import { UnitsComponent } from './components/units/units.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanyService } from './Services/Company/company.service';
 import { TypeService } from './Services/Type/type.service';
 import { TypeComponent } from './components/Type/type.component';
@@ -42,7 +42,7 @@ import { ClientService } from './Services/Client/client.service';
     SalesComponent,
     SpeciesComponent,
     UnitsComponent,
-  TypeComponent
+    TypeComponent
 
 
   ],
@@ -50,7 +50,8 @@ import { ClientService } from './Services/Client/client.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
- FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     CompanyService,

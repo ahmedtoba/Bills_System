@@ -16,33 +16,32 @@
                           </div>
                           <div class="card-body">
                               <div class="px-3">
-                                  <form class="form form-horizontal" >
+                                  <form class="form form-horizontal" [formGroup]="companyForm" (ngSubmit)="saveCompanyData()">
 
                           <div class="form-group row">
                                               <label class="col-md-3 label-control" for="projectinput9">Company Name : </label>
                                               <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="name" [(ngModel)]="company.name">
+                                                  <input formControlName="name" type="text" id="projectinput9" class="form-control" name="name">
+                                                  <span class="ml-2 help-block text-danger" *ngIf="companyForm.get('name')?.touched && companyForm.get('name')?.hasError('required')">Company name is required</span>
+                                                  <span class="ml-2 help-block text-danger" *ngIf="companyForm.get('name')?.touched && companyForm.get('name')?.hasError('exists')">Company name already exists</span>
                                               </div>
                                           </div>
                                             <div class="form-group row">
                                               <label class="col-md-3 label-control" for="projectinput9">Notes: </label>
                                               <div class="col-md-9">
-                                                  <textarea id="projectinput9" rows="5" class="form-control" name="comment" [(ngModel)]="company.Notes"></textarea>
+                                                  <textarea formControlName="notes" id="projectinput9" rows="5" class="form-control" name="comment"></textarea>
                                               </div>
                                           </div>
+                                          <div class="form-actions">
+                                            <button type="reset" class="btn btn-danger mr-1">
+                                                <i class="icon-trash"></i> Cancel
+                                            </button>
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="icon-note"></i> Save
+                                            </button>
+                                        </div>
                                       </form></div>
-
-                                      <div class="form-actions">
-                                          <button type="button" class="btn btn-danger mr-1" (click)="Clear()">
-                                              <i class="icon-trash"></i> Cancel
-                                          </button>
-                                          <button type="button" class="btn btn-success" (click)="addCompany()">
-                                              <i class="icon-note"></i> Save
-                                          </button>
-                                      </div>
-
                               </div>
-
                       </div>
                   </div>
               </div>

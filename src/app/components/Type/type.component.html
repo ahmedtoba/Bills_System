@@ -16,26 +16,30 @@
                           </div>
                           <div class="card-body">
                               <div class="px-3">
-                                  <form class="form form-horizontal" >
-
-                          <div class="form-group row">
+                                  <form class="form form-horizontal" [formGroup]="typeForm" (ngSubmit)="saveType()">
+                                      <div class="form-group row">
                                               <label class="col-md-3 label-control" for="projectinput9">Type Name : </label>
                                               <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="name" [(ngModel)]="type.Name">
-                                              </div>
+                                                  <input formControlName="name" type="text" id="projectinput9" class="form-control" name="name">
+                                                  <span class="ml-2 help-block text-danger"
+                                                  *ngIf="typeForm.get('name').touched && typeForm.get('name').hasError('required')">
+                                                    Type Name is Required
+                                                  </span>
+                                                  <span class="ml-2 help-block text-danger"
+                                                  *ngIf="typeForm.get('name').touched && typeForm.get('name').hasError('exists')">
+                                                    Type Name Already Exists
+                                                  </span>
+                                                </div>
                                           </div>
-
+                                          <div class="form-actions">
+                                            <button type="reset" class="btn btn-danger mr-1">
+                                                <i class="icon-trash"></i> Cancel
+                                            </button>
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="icon-note"></i> Save
+                                            </button>
+                                        </div>
                                       </form></div>
-
-                                      <div class="form-actions">
-                                          <button type="button" class="btn btn-danger mr-1" (click)="Clear()">
-                                              <i class="icon-trash"></i> Cancel
-                                          </button>
-                                          <button type="button" class="btn btn-success" (click)="addType()">
-                                              <i class="icon-note"></i> Save
-                                          </button>
-                                      </div>
-
                               </div>
 
                       </div>
