@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import{HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -16,6 +16,15 @@ import { SalesReportComponent } from './components/sales-report/sales-report.com
 import { SalesComponent } from './components/sales/sales.component';
 import { SpeciesComponent } from './components/species/species.component';
 import { UnitsComponent } from './components/units/units.component';
+import { FormsModule } from '@angular/forms';
+import { CompanyService } from './Services/Company/company.service';
+import { TypeService } from './Services/Type/type.service';
+import { TypeComponent } from './components/Type/type.component';
+import { UnitService } from './Services/Unit/unit.service';
+import { ClientService } from './Services/Client/client.service';
+
+
+
 
 @NgModule({
   declarations: [
@@ -32,13 +41,23 @@ import { UnitsComponent } from './components/units/units.component';
     SalesReportComponent,
     SalesComponent,
     SpeciesComponent,
-    UnitsComponent
+    UnitsComponent,
+  TypeComponent
+
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+ FormsModule
   ],
-  providers: [],
+  providers: [
+    CompanyService,
+    TypeService,
+    UnitService,
+    ClientService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

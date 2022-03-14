@@ -16,32 +16,27 @@
                           </div>
                           <div class="card-body">
                               <div class="px-3">
-                                  <form class="form form-horizontal">
+                                  <form class="form form-horizontal" >
 
                           <div class="form-group row">
                                               <label class="col-md-3 label-control" for="projectinput9">Company Name : </label>
                                               <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="Type">
+                                                  <input type="text" id="projectinput9" class="form-control" name="name" [(ngModel)]="company.name">
                                               </div>
                                           </div>
-
-
-
-
-
-                                          <div class="form-group row">
+                                            <div class="form-group row">
                                               <label class="col-md-3 label-control" for="projectinput9">Notes: </label>
                                               <div class="col-md-9">
-                                                  <textarea id="projectinput9" rows="5" class="form-control" name="comment"></textarea>
+                                                  <textarea id="projectinput9" rows="5" class="form-control" name="comment" [(ngModel)]="company.Notes"></textarea>
                                               </div>
                                           </div>
                                       </form></div>
 
                                       <div class="form-actions">
-                                          <button type="button" class="btn btn-danger mr-1">
+                                          <button type="button" class="btn btn-danger mr-1" (click)="Clear()">
                                               <i class="icon-trash"></i> Cancel
                                           </button>
-                                          <button type="button" class="btn btn-success">
+                                          <button type="button" class="btn btn-success" (click)="addCompany()">
                                               <i class="icon-note"></i> Save
                                           </button>
                                       </div>
