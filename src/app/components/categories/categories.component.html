@@ -1,94 +1,102 @@
 <div class="main-panel">
-  <div class="main-content">
-     <div class="content-wrapper">
-        <div class="container-fluid">
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="container-fluid">
 
-          <div id="horizontal-form-layouts">
+                <div id="horizontal-form-layouts">
 
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="card">
-                          <div class="card-header">
-                              <div class="card-title-wrap bar-success">
-                                  <h4 class="card-title" id="horz-layout-basic">Categories Form</h4>
-                              </div>
-                              <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
-                          </div>
-                          <div class="card-body">
-                              <div class="px-3">
-                                  <form class="form form-horizontal">
-                                      <div class="form-group row">
-                                          <label class="col-md-3 label-control" for="projectinput7">Company Name: </label>
-                                          <div class="col-md-9">
-                                              <select id="projectinput7" name="budget" class="form-control">
-                                                  <option value="0" selected="" disabled="">choose from Companies</option>
-                                                  <option value="company1">Company 1</option>
-                                                  <option value="company2">company2</option>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title-wrap bar-success">
+                                        <h4 class="card-title" id="horz-layout-basic">Categories Form</h4>
+                                    </div>
+                                    <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="px-3">
+                                        <form class="form form-horizontal" [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput7">Company Name: </label>
+                                                <div class="col-md-9">
+                                                    <select id="projectinput7" name="budget" class="form-control" formControlName="company">
 
-                                              </select>
-                                          </div>
-                                      </div>
-                                      <div class="form-group row">
-                                          <label class="col-md-3 label-control" for="projectinput7">Species Name: </label>
-                                          <div class="col-md-9">
-                                              <select id="projectinput7" name="budget" class="form-control">
-                                                  <option value="0" selected="" disabled="">choose from Species</option>
-                                                  <option value="company1">Company 1</option>
-                                                  <option value="company2">company2</option>
+                                                  <option [value]="null" selected="" disabled="">choose from Companies</option>
+                                                  <option [value]="compony.id" *ngFor="let compony of companies">{{compony.name}}</option>
 
                                               </select>
-                                          </div>
-                                      </div>
-                          <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">Unit Name : </label>
-                                              <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="Type">
-                                              </div>
-                                          </div>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('company').touched && categoryForm.get('company').hasError('required')">company name is required</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput7">Species Name: </label>
+                                                <div class="col-md-9">
+
+                                                    <select id="projectinput7" name="budget" class="form-control" formControlName="type">
+                                                  <option [value]="null"  selected="" disabled="">choose from Species</option>
+                                                  <option [value]="type.id" *ngFor="let type of types">{{type.name}}</option>
 
 
-                                          <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">selling price:
+                                              </select>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('type').touched && categoryForm.get('type').hasError('required')">Specie name is required</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput9">Unit Name : </label>
+                                                <div class="col-md-9">
+                                                    <select id="projectinput7" name="budget" class="form-control" formControlName="unit">
+                                                  <option [value]="null" selected="" disabled="">choose from Units</option>
+                                                  <option [value]="unit.id" *ngFor="let unit of units">{{unit.name}}</option>
+                                                </select>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('unit').touched && categoryForm.get('unit').hasError('required')">unit name is required</span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput9">selling price:
                                                   : </label>
-                                              <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="Type">
-                                              </div>
-                                          </div>
-                                          <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">buying Price : </label>
-                                              <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="Type">
-                                              </div>
-                                          </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="sellingPrice">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('required')">Selling price is required</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput9">buying Price : </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="buyingPrice">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('required')">Buying price is required</span>
+                                                </div>
+                                            </div>
 
 
-                                          <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">Notes: </label>
-                                              <div class="col-md-9">
-                                                  <textarea id="projectinput9" rows="5" class="form-control" name="comment"></textarea>
-                                              </div>
-                                          </div>
-                                      </form></div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput9">Notes: </label>
+                                                <div class="col-md-9">
+                                                    <textarea id="projectinput9" rows="5" class="form-control" name="comment" formControlName="notes"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <button type="reset" class="btn btn-danger mr-1">
+                                                  <i class="icon-trash"></i> Cancel
+                                              </button>
+                                                <button type="submit" class="btn btn-success">
+                                                  <i class="icon-note"></i> Save
+                                              </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
 
-                                      <div class="form-actions">
-                                          <button type="button" class="btn btn-danger mr-1">
-                                              <i class="icon-trash"></i> Cancel
-                                          </button>
-                                          <button type="button" class="btn btn-success">
-                                              <i class="icon-note"></i> Save
-                                          </button>
-                                      </div>
-
-                              </div>
-
-                      </div>
-                  </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </div>
-     </div>
-  </div>
-  <footer class="footer footer-static footer-light">
-     <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2022
+        <footer class="footer footer-static footer-light">
+            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2022
         <a href="#" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">Pioneer-solutions</a>, All rights reserved. </span></p>
-  </footer>
-</div>
+        </footer>
+    </div>
