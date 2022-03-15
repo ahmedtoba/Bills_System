@@ -1,73 +1,80 @@
 <div class="main-panel">
-  <div class="main-content">
-     <div class="content-wrapper">
-        <div class="container-fluid">
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="container-fluid">
 
-          <div id="horizontal-form-layouts">
+                <div id="horizontal-form-layouts">
 
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="card">
-                          <div class="card-header">
-                              <div class="card-title-wrap bar-success">
-                                  <h4 class="card-title" id="horz-layout-basic">Clients</h4>
-                              </div>
-                              <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
-                          </div>
-                          <div class="card-body">
-                              <div class="px-3">
-                                  <form class="form form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title-wrap bar-success">
+                                        <h4 class="card-title" id="horz-layout-basic">Clients</h4>
+                                    </div>
+                                    <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="px-3">
+                                        <form class="form form-horizontal" [formGroup]="clientForm" (ngSubmit)="saveClient()">
 
-                                         <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">Client Name : </label>
-                                              <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="Name" [(ngModel)]="client.name">
-                                              </div>
-                                          </div>
-                                          <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">Phone : </label>
-                                              <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="phoneNumber" [(ngModel)]="client.phoneNumber">
-                                              </div>
-                                          </div>
-                                          <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">Number : </label>
-                                              <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="Id" [(ngModel)]="client.id" disabled>
-                                              </div>
-                                          </div>
-                                          <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">Address: </label>
-                                              <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="Address" [(ngModel)]="client.address">
-                                              </div>
-                                          </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput9">Client Name : </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="projectinput9" class="form-control" name="Name" formControlName="name">
+                                                    <span class="help-block text-danger ml-2" *ngIf="clientForm.get('name').touched && clientForm.get('name').hasError('required')">Client name is required</span>
+                                                    <span class="help-block text-danger ml-2" *ngIf="clientForm.get('name').touched && clientForm.get('name').hasError('exists')">Client name is already exists</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput9">Phone : </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="projectinput9" class="form-control" name="phoneNumber" formControlName="phoneNumber">
+                                                    <span class="help-block text-danger ml-2" *ngIf="clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('required')">Phone Number is required</span>
+                                                    <span class="help-block text-danger ml-2" *ngIf="clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('exists')">Phone Number is already exists</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput9">Number : </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="projectinput9" class="form-control" name="Id" formControlName="id">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput9">Address: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="projectinput9" class="form-control" name="Address" formControlName="address">
+                                                    <span class="help-block ml-2 text-danger" *ngIf="clientForm.get('address').touched && clientForm.get('address').hasError('required')">Address is required</span>
+                                                    <span class="help-block ml-2 text-danger" *ngIf="clientForm.get('address').touched && clientForm.get('address').hasError('exists')">Address is already exists</span>
+                                                </div>
+                                            </div>
 
 
 
 
 
-                                      </form></div>
+                                        </form>
+                                    </div>
 
-                                      <div class="form-actions">
-                                          <button type="button" class="btn btn-danger mr-1" (click)="Clear()">
+                                    <div class="form-actions">
+                                        <button type="reset" class="btn btn-danger mr-1">
                                               <i class="icon-trash"></i> Cancel
                                           </button>
-                                          <button type="button" class="btn btn-success" (click)="addClient()">
+                                        <button type="submit" class="btn btn-success">
                                               <i class="icon-note"></i> Save
                                           </button>
-                                      </div>
+                                    </div>
 
-                              </div>
+                                </div>
 
-                      </div>
-                  </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </div>
-     </div>
-  </div>
-  <footer class="footer footer-static footer-light">
-     <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2022
+        <footer class="footer footer-static footer-light">
+            <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2022
         <a href="#" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">Pioneer-solutions</a>, All rights reserved. </span></p>
-  </footer>
-</div>
+        </footer>
+    </div>
