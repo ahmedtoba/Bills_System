@@ -1,4 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CompanyType } from 'src/app/models/company-type.model';
+import { Company } from 'src/app/models/company.model';
+import { Item } from 'src/app/models/item.model';
+import { Type } from 'src/app/models/type.model';
+import { Unit } from 'src/app/models/unit.model';
+import { CategoryService } from 'src/app/Services/category/category.service';
+import { CompanyTypeService } from 'src/app/Services/company-type/company-type.service';
+import { CompanyService } from 'src/app/Services/Company/company.service';
+import { TypeService } from 'src/app/Services/Type/type.service';
+import { UnitService } from 'src/app/Services/Unit/unit.service';
 
 @Component({
   selector: 'app-categories',
@@ -6,10 +17,62 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
+  categories: Item[]=[]
+  companies: Company[] = []
+  types: Type[]= []
+  units: Unit[] = []
+  categoryForm:FormGroup=new FormGroup({
 
-  constructor() { }
+    'company': new FormControl(null, [Validators.required,]),
+    'type':new FormControl(null, [Validators.required]),
+    'unit': new FormControl(null, [Validators.required]),
+    'sellingPrice': new FormControl(null, [Validators.required]),
+    'buyingPrice': new FormControl(null, [Validators.required]),
+    'notes':new FormControl(null)
+  })
+  constructor(private categoryService:CategoryService, private companyService: CompanyService, private typeServices: TypeService, private unitService: UnitService) { }
 
   ngOnInit(): void {
+       this.categoryService.GetAll().subscribe(
+          data => {this.categories = data
+          console.log(data) }
+       )
+       this.companyService.getAll().subscribe(
+         data =>{
+           this.companies = data
+         }
+       )
+       this.typeServices.GetAll().subscribe(
+         data => {
+           this.types = data
+         }
+       )
+       this.unitService.getAll().subscribe(
+         data => {
+           this.units = data
+         }
+       )
+
   }
+  saveCategory(){
+    if(this.categoryForm.valid){
+      this.categoryService.Insert({
+        id:0,
+        name:"",
+        companyId: this.categoryForm.value.company,
+        notes: this.categoryForm.value.notes,
+        typeId: this.categoryForm.value.type,
+        unitId: this.categoryForm.value.unit,
+        sellingPrice: this.categoryForm.value.sellingPrice,
+        buyingPrice:this.categoryForm.value.buyingPrice,
+        initialQuantity:0,
+        remainingQuantity:0
+      }).subscribe(
+        data => console.log(data)
+
+      )
+    }
+  }
+
 
 }
