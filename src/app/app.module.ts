@@ -22,6 +22,8 @@ import { TypeService } from './Services/Type/type.service';
 import { TypeComponent } from './components/Type/type.component';
 import { UnitService } from './Services/Unit/unit.service';
 import { ClientService } from './Services/Client/client.service';
+import { ItemProcessComponent } from './components/item-process/item-process.component';
+import { InvoiceService } from './Services/invoice/invoice.service';
 
 
 
@@ -42,7 +44,8 @@ import { ClientService } from './Services/Client/client.service';
     SalesComponent,
     SpeciesComponent,
     UnitsComponent,
-    TypeComponent
+    TypeComponent,
+    ItemProcessComponent
 
 
   ],
@@ -57,7 +60,8 @@ import { ClientService } from './Services/Client/client.service';
     CompanyService,
     TypeService,
     UnitService,
-    ClientService
+    ClientService,
+    InvoiceService
   ],
   bootstrap: [AppComponent]
 })

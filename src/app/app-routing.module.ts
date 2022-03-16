@@ -4,6 +4,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { ClientsComponent } from './components/clients/clients.component';
 import { CompanyDataComponent } from './components/company-data/company-data.component';
 import { HomeComponent } from './components/home/home.component';
+import { ItemProcessComponent } from './components/item-process/item-process.component';
 import { LoginComponent } from './components/login/login.component';
 import { SalesReportComponent } from './components/sales-report/sales-report.component';
 import { SalesComponent } from './components/sales/sales.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:"sales", component: SalesComponent},
   {path:"species", component: SpeciesComponent},
   {path:"units", component: UnitsComponent},
+  {path:"process", component: ItemProcessComponent},
 ];
 
 @NgModule({
