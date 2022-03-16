@@ -10,7 +10,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title-wrap bar-success">
-                                        <h4 class="card-title" id="horz-layout-basic">Categories Form</h4>
+                                        <h4 class="card-title" id="horz-layout-basic">Items Form</h4>
                                     </div>
                                     <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
                                 </div>
@@ -23,7 +23,7 @@
                                                     <select id="projectinput7" name="budget" class="form-control" formControlName="company">
 
                                                   <option [value]="null" selected="" disabled="">choose from Companies</option>
-                                                  <option [value]="compony.id" *ngFor="let compony of companies">{{compony.name}}</option>
+                                                  <option [value]="company.id" *ngFor="let company of companies">{{company.name}}</option>
 
                                               </select>
                                                     <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('company').touched && categoryForm.get('company').hasError('required')">company name is required</span>
@@ -35,9 +35,7 @@
 
                                                     <select id="projectinput7" name="budget" class="form-control" formControlName="type">
                                                   <option [value]="null"  selected="" disabled="">choose from Species</option>
-                                                  <option [value]="type.id" *ngFor="let type of types">{{type.name}}</option>
-
-
+                                                  <option [value]="cType.typeId" *ngFor="let cType of companyTypes | filterByCompany : categoryForm.value.company">{{cType['type'].name}}</option>
                                               </select>
                                                     <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('type').touched && categoryForm.get('type').hasError('required')">Specie name is required</span>
                                                 </div>
@@ -52,24 +50,45 @@
                                                     <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('unit').touched && categoryForm.get('unit').hasError('required')">unit name is required</span>
                                                 </div>
                                             </div>
-
+                                            <div class="form-group row">
+                                              <label class="col-md-3 label-control" for="projectinput9">Item Name
+                                                : </label>
+                                              <div class="col-md-9">
+                                                  <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="name">
+                                                  <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('name').touched && categoryForm.get('name').hasError('required')">Item name is required</span>
+                                                  <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('name').touched && categoryForm.get('name').hasError('exists')">Item name already exists</span>
+                                              </div>
+                                            </div>
+                                            <div class="form-group row">
+                                              <label class="col-md-3 label-control" for="projectinput9">buying Price : </label>
+                                              <div class="col-md-9">
+                                                <input type="number" id="projectinput9" class="form-control" name="Type" formControlName="buyingPrice">
+                                                <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('required')">Buying price is required</span>
+                                                <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('min')">Buying price cannot be less than Zero</span>
+                                              </div>
+                                            </div>
 
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">selling price:
+                                                <label class="col-md-3 label-control" for="projectinput9">selling price
                                                   : </label>
                                                 <div class="col-md-9">
-                                                    <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="sellingPrice">
+                                                    <input type="number" id="projectinput9" class="form-control" name="Type" formControlName="sellingPrice">
                                                     <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('required')">Selling price is required</span>
-                                                </div>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('priceError')">Selling price cannot be less than Buying price</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('min')">selling price cannot be less than Zero</span>
+
+                                                  </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">buying Price : </label>
+                                                <label class="col-md-3 label-control" for="projectinput9">selling price
+                                                  : </label>
                                                 <div class="col-md-9">
-                                                    <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="buyingPrice">
-                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('required')">Buying price is required</span>
-                                                </div>
-                                            </div>
+                                                    <input type="number" id="projectinput9" class="form-control" name="Type" formControlName="quantity">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('quantity').touched && categoryForm.get('quantity').hasError('required')">Quantity is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('quantity').touched && categoryForm.get('quantity').hasError('min')">Quanity must be greater than zero</span>
 
+                                                  </div>
+                                            </div>
 
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="projectinput9">Notes: </label>

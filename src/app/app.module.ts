@@ -24,6 +24,7 @@ import { UnitService } from './Services/Unit/unit.service';
 import { ClientService } from './Services/Client/client.service';
 import { ItemProcessComponent } from './components/item-process/item-process.component';
 import { InvoiceService } from './Services/invoice/invoice.service';
+import { FilterByCompanyPipe } from './pipes/filter-by-company.pipe';
 
 
 
@@ -45,7 +46,8 @@ import { InvoiceService } from './Services/invoice/invoice.service';
     SpeciesComponent,
     UnitsComponent,
     TypeComponent,
-    ItemProcessComponent
+    ItemProcessComponent,
+    FilterByCompanyPipe
 
 
   ],

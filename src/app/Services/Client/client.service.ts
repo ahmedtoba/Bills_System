@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
 
 @Injectable({
@@ -17,5 +18,9 @@ export class ClientService {
   }
   Insert(client:Client){
     return this.myClinet.post(`${this.BaseURL}`,client)
+  }
+
+  newClientNumber() {
+    return this.myClinet.get<number>(`${this.BaseURL}/max`)
   }
 }

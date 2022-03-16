@@ -25,28 +25,31 @@
                                                   <option [value]="null" selected="" disabled="">Chose Item</option>
                                                   <option [value]="item.id" *ngFor="let item of items" >{{item.name}}</option>
                                               </select>
+                                              <br>
+                                              <table class="table text-center" *ngIf="itemTable">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Quantity</th>
+                                                    <th scope="col">Client Name</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr *ngFor="let item of itemTable;index as i">
+                                                    <th scope="row">{{i+1}}</th>
+                                                    <td>{{item.date| date:'dd-MM-yyyy'}}</td>
+                                                    <td>{{item.quantity}}</td>
+                                                    <td>{{item.client.name}</td>
+                                                  </tr>
+
+                                                </tbody>
+                                              </table>
                                           </div>
                                       </div>
 
                                       </form></div>
 
-                                      <table class="table" *ngIf="itemTable">
-                                        <thead>
-                                          <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Quantity</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr *ngFor="let item of itemTable;index as i">
-                                            <th scope="row">{{i+1}}</th>
-                                            <td>{{item.date| date:'dd-MM-yyyy'}}</td>
-                                            <td>{{item.quantity}}</td>
-                                          </tr>
-
-                                        </tbody>
-                                      </table>
 
                               </div>
 

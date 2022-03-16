@@ -1,3 +1,4 @@
+import { Client } from "./client.model";
 import { Item } from "./item.model";
 
 export class Invoice {
@@ -11,6 +12,8 @@ export class Invoice {
     public total : number,
     public clientId : number,
     public itemId : number,
-    public item:Item
+    public item:Item,
+    public client: Client
+
   ) {}
 }

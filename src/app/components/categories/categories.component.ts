@@ -17,61 +17,77 @@ import { UnitService } from 'src/app/Services/Unit/unit.service';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  categories: Item[]=[]
+  items: Item[]=[]
   companies: Company[] = []
   types: Type[]= []
   units: Unit[] = []
-  categoryForm:FormGroup=new FormGroup({
+  companyTypes: CompanyType[] = []
 
+  categoryForm:FormGroup=new FormGroup({
     'company': new FormControl(null, [Validators.required,]),
     'type':new FormControl(null, [Validators.required]),
     'unit': new FormControl(null, [Validators.required]),
-    'sellingPrice': new FormControl(null, [Validators.required]),
-    'buyingPrice': new FormControl(null, [Validators.required]),
+    'name': new FormControl(null, [Validators.required]),
+    'quantity': new FormControl(null, [Validators.required, Validators.min(1)]),
+    'buyingPrice': new FormControl(null, [Validators.required, Validators.min(0)]),
+    'sellingPrice': new FormControl(null, [Validators.required, Validators.min(0), this.sellingGreaterThanBuying.bind(this)]),
     'notes':new FormControl(null)
   })
-  constructor(private categoryService:CategoryService, private companyService: CompanyService, private typeServices: TypeService, private unitService: UnitService) { }
+  constructor(private categoryService:CategoryService, private companyService: CompanyService,
+              private typeServices: TypeService, private unitService: UnitService,
+              private companyTypeService: CompanyTypeService) { }
 
   ngOnInit(): void {
        this.categoryService.GetAll().subscribe(
-          data => {this.categories = data
-          console.log(data) }
+          data => this.items = data
        )
        this.companyService.getAll().subscribe(
-         data =>{
-           this.companies = data
-         }
+         data => this.companies = data
        )
        this.typeServices.GetAll().subscribe(
-         data => {
-           this.types = data
-         }
+         data => this.types = data
        )
        this.unitService.getAll().subscribe(
-         data => {
-           this.units = data
-         }
+         data => this.units = data
+       );
+       this.companyTypeService.GetAll().subscribe(
+         data => this.companyTypes = data
        )
-
   }
   saveCategory(){
     if(this.categoryForm.valid){
       this.categoryService.Insert({
         id:0,
-        name:"",
+        name:this.categoryForm.value.name,
         companyId: this.categoryForm.value.company,
         notes: this.categoryForm.value.notes,
         typeId: this.categoryForm.value.type,
         unitId: this.categoryForm.value.unit,
         sellingPrice: this.categoryForm.value.sellingPrice,
         buyingPrice:this.categoryForm.value.buyingPrice,
-        initialQuantity:0,
-        remainingQuantity:0
+        initialQuantity: this.categoryForm.value.quantity,
+        remainingQuantity: this.categoryForm.value.quantity
       }).subscribe(
         data => console.log(data)
-
       )
     }
+    console.log(this.categoryForm)
+  }
+
+  nameIsUnique(control: FormControl) : {[msg: string]: boolean}{
+    for(let item of this.items){
+      if (item.name === control.value)
+        return {'exists': true}
+    }
+    return null;
+  }
+
+  sellingGreaterThanBuying(control: FormControl) : {[msg: string]: boolean} {
+    const buying : number = this.categoryForm?.value?.buyingPrice;
+    const selling : number = control.value;
+    if (selling < buying)
+      return {'priceError': true}
+    return null;
   }
 
 
