@@ -1,0 +1,64 @@
+<div class="main-panel">
+  <div class="main-content">
+     <div class="content-wrapper">
+        <div class="container-fluid">
+
+          <div id="horizontal-form-layouts">
+
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="card">
+                          <div class="card-header">
+                              <div class="card-title-wrap bar-success">
+                                  <h4 class="card-title" id="horz-layout-basic">Item Process </h4>
+                              </div>
+                              <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
+                          </div>
+                          <div class="card-body">
+                              <div class="px-3">
+                                  <form class="form form-horizontal" [formGroup]="Form">
+                                      <div class="form-group row">
+                                          <label class="col-md-3 label-control" for="projectinput7">Choose Item
+                                              : </label>
+                                          <div class="col-md-9">
+                                              <select id="projectinput7" (change)="GetData()" name="budget" class="form-control" formControlName="item">
+                                                  <option [value]="null" selected="" disabled="">Chose Item</option>
+                                                  <option [value]="item.id" *ngFor="let item of items" >{{item.name}}</option>
+                                              </select>
+                                          </div>
+                                      </div>
+
+                                      </form></div>
+
+                                      <table class="table" *ngIf="itemTable">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Quantity</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let item of itemTable;index as i">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item.date| date:'dd-MM-yyyy'}}</td>
+                                            <td>{{item.quantity}}</td>
+                                          </tr>
+
+                                        </tbody>
+                                      </table>
+
+                              </div>
+
+                      </div>
+                  </div>
+              </div>
+        </div>
+     </div>
+  </div>
+  <footer class="footer footer-static footer-light">
+     <p class="clearfix text-muted text-center px-2"><span>Copyright  &copy; 2022
+        <a href="#" id="pixinventLink" target="_blank" class="text-bold-800 primary darken-2">Pioneer-solutions</a>, All rights reserved. </span></p>
+  </footer>
+</div>
+
