@@ -7,14 +7,18 @@ import { Invoice } from 'src/app/models/invoice.model';
 })
 export class InvoiceService {
   private BaseURL="http://localhost:55245/api/invoice"
-  constructor(private myClinet:HttpClient) {
+  constructor(private myClient:HttpClient) {}
 
-   }
-   getByItemId(itemId){
-            return this.myClinet.get<Invoice[]>(`${this.BaseURL}/${itemId}`)
-      }
 
-      Insert(invoice){
-            return this.myClinet.post<Invoice[]>(this.BaseURL,invoice)
-      }
+  getByItemId(itemId){
+    return this.myClient.get<Invoice[]>(`${this.BaseURL}/${itemId}`)
+  }
+
+  Insert(invoices: Invoice[]){
+    return this.myClient.post<Invoice[]>(this.BaseURL,invoices)
+  }
+
+  getAll(){
+    return this.myClient.get<Invoice[]>(this.BaseURL)
+  }
 }

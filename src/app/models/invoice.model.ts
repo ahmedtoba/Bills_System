@@ -12,8 +12,8 @@ export class Invoice {
     public total : number,
     public clientId : number,
     public itemId : number,
-    public item:Item,
-    public client: Client
-
+    public sellingPrice: number,
+    public item?:Item,
+    public client?: Client
   ) {}
 }
