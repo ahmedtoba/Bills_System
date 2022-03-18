@@ -11,6 +11,10 @@ export class InvoiceService {
 
    }
    getByItemId(itemId){
-    return this.myClinet.get<Invoice[]>(`${this.BaseURL}/${itemId}`)
+            return this.myClinet.get<Invoice[]>(`${this.BaseURL}/${itemId}`)
+      }
+
+      Insert(invoice){
+            return this.myClinet.post<Invoice[]>(this.BaseURL,invoice)
       }
 }

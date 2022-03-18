@@ -47,7 +47,8 @@ import { FilterByCompanyPipe } from './pipes/filter-by-company.pipe';
     UnitsComponent,
     TypeComponent,
     ItemProcessComponent,
-    FilterByCompanyPipe
+    FilterByCompanyPipe,
+
 
 
   ],
