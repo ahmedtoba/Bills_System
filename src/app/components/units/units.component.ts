@@ -11,6 +11,11 @@ import { UnitService } from 'src/app/Services/Unit/unit.service';
 export class UnitsComponent implements OnInit {
 
     units: Unit[]=[];
+
+     //saved action
+  popup = false
+  name = 'Angular';
+  //---------
     unitForm: FormGroup = new FormGroup({
       'name': new FormControl(null, [Validators.required, this.nameIsRequired.bind(this)]),
       'notes': new FormControl(null)

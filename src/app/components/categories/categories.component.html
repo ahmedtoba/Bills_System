@@ -51,21 +51,21 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">Item Name
+                                                <label class="col-md-3 label-control" for="projectinput9">Item Name
                                                 : </label>
-                                              <div class="col-md-9">
-                                                  <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="name">
-                                                  <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('name').touched && categoryForm.get('name').hasError('required')">Item name is required</span>
-                                                  <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('name').touched && categoryForm.get('name').hasError('exists')">Item name already exists</span>
-                                              </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="name">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('name').touched && categoryForm.get('name').hasError('required')">Item name is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('name').touched && categoryForm.get('name').hasError('exists')">Item name already exists</span>
+                                                </div>
                                             </div>
                                             <div class="form-group row">
-                                              <label class="col-md-3 label-control" for="projectinput9">buying Price : </label>
-                                              <div class="col-md-9">
-                                                <input type="number" id="projectinput9" class="form-control" name="Type" formControlName="buyingPrice">
-                                                <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('required')">Buying price is required</span>
-                                                <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('min')">Buying price cannot be less than Zero</span>
-                                              </div>
+                                                <label class="col-md-3 label-control" for="projectinput9">buying Price : </label>
+                                                <div class="col-md-9">
+                                                    <input type="number" id="projectinput9" class="form-control" name="Type" formControlName="buyingPrice">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('required')">Buying price is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('min')">Buying price cannot be less than Zero</span>
+                                                </div>
                                             </div>
 
                                             <div class="form-group row">
@@ -77,7 +77,7 @@
                                                     <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('priceError')">Selling price cannot be less than Buying price</span>
                                                     <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('min')">selling price cannot be less than Zero</span>
 
-                                                  </div>
+                                                </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="projectinput9">selling price
@@ -87,7 +87,7 @@
                                                     <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('quantity').touched && categoryForm.get('quantity').hasError('required')">Quantity is required</span>
                                                     <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('quantity').touched && categoryForm.get('quantity').hasError('min')">Quanity must be greater than zero</span>
 
-                                                  </div>
+                                                </div>
                                             </div>
 
                                             <div class="form-group row">
@@ -100,9 +100,18 @@
                                                 <button type="reset" class="btn btn-danger mr-1">
                                                   <i class="icon-trash"></i> Cancel
                                               </button>
-                                                <button type="submit" class="btn btn-success">
+                                                <button type="submit" class="btn btn-success" (click)="popup = true">
                                                   <i class="icon-note"></i> Save
                                               </button>
+                                                <div class="overlay" *ngIf="popup">
+                                                    <div class="popup">
+                                                        <h2>saved</h2>
+                                                        <a class="close" (click)="popup = false">&times;</a>
+                                                        <div class="content">
+                                                            you have selected this event
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>

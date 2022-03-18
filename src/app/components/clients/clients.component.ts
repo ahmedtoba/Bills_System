@@ -12,6 +12,11 @@ import { ClientService } from 'src/app/Services/Client/client.service';
 export class ClientsComponent implements OnInit {
   clientNumber: number;
   clients: Client[]= []
+
+   //saved action
+   popup = false
+   name = 'Angular';
+   //---------
   clientForm:FormGroup= new FormGroup({
     'name': new FormControl(null, [Validators.required, this.nameIsUnique.bind(this)]),
     'phoneNumber': new FormControl(null, [Validators.required ,this.phoneNumberIsUnique.bind(this)]),

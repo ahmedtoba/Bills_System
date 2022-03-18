@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalesReportComponent implements OnInit {
 
+  //saved action
+  popup = false
+  name = 'Angular';
+  //---------
   constructor() { }
 
   ngOnInit(): void {

@@ -24,6 +24,11 @@ export class SalesComponent implements OnInit {
 
   invoices: Invoice[] = [];
 
+   //saved action
+   popup = false
+   name = 'Angular';
+   //---------
+
   invoiceForm:FormGroup = new FormGroup({
     'invoice' : new FormGroup({
       'Date':new FormControl(null,[Validators.required]),

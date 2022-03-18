@@ -11,6 +11,11 @@ import { TypeService } from 'src/app/Services/Type/type.service';
 export class TypeComponent implements OnInit {
   types: Type[] = [];
 
+   //saved action
+   popup = false
+   name = 'Angular';
+   //---------
+
   typeForm: FormGroup = new FormGroup({
     'name': new FormControl(null, [Validators.required, this.nameIsUnique.bind(this)])
   });
@@ -30,7 +35,8 @@ export class TypeComponent implements OnInit {
       id: 0,
       name: this.typeForm.value.name,
     }).subscribe(respone => {
-      alert("Type created successfully")
+      console.log(respone);
+
     })
     this.typeForm.reset()
   }
