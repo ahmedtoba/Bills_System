@@ -17,6 +17,10 @@ export class SpeciesComponent implements OnInit {
   companies: Company[]=[];
   types: Type[]=[]
   companytypes: CompanyType[]=[]
+   //saved action
+   popup = false
+   name = 'Angular';
+   //---------
   constructor(private companyService: CompanyService , private typeService: TypeService, private companyTypeService: CompanyTypeService) { }
   speciesForm: FormGroup=new FormGroup({
     'company': new FormControl(null, [Validators.required,]),
@@ -43,7 +47,6 @@ export class SpeciesComponent implements OnInit {
         typeId: this.speciesForm.value.type
       }).subscribe(
         response => {
-          alert("Species Created Successfully");
           console.log(response)
         });
       this.speciesForm.reset()

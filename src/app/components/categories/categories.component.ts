@@ -22,6 +22,10 @@ export class CategoriesComponent implements OnInit {
   types: Type[]= []
   units: Unit[] = []
   companyTypes: CompanyType[] = []
+  //saved action
+  popup = false
+  name = 'Angular';
+  //---------
 
   categoryForm:FormGroup=new FormGroup({
     'company': new FormControl(null, [Validators.required,]),

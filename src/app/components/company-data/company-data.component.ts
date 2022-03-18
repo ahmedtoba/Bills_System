@@ -11,6 +11,10 @@ import { CompanyService } from 'src/app/Services/Company/company.service';
 export class CompanyDataComponent implements OnInit {
 
   companies: Company[] = [];
+   //saved action
+   popup = false
+   name = 'Angular';
+   //---------
 
   companyForm: FormGroup = new FormGroup({
     'name': new FormControl(null, [Validators.required, this.nameIsUnique.bind(this)]),
