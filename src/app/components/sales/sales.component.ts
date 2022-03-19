@@ -24,7 +24,7 @@ export class SalesComponent implements OnInit {
 
   invoices: Invoice[] = [];
 
-   //saved action
+  //saved action
    popup = false
    name = 'Angular';
    //---------
@@ -32,8 +32,8 @@ export class SalesComponent implements OnInit {
   invoiceForm:FormGroup = new FormGroup({
     'invoice' : new FormGroup({
       'Date':new FormControl(null,[Validators.required]),
-      'Client':new FormControl(null,[Validators.required]),
-      'Item':new FormControl(null,[Validators.required]),
+      'Client':new FormControl(0,[Validators.required]),
+      'Item':new FormControl(0,[Validators.required]),
       'Quantity':new FormControl({value:null, disabled: true},[Validators.required,this.CheckQuantity.bind(this)]),
       'Sell':new FormControl({value:null, disabled: true},[Validators.required]),
       'Number':new FormControl({value: null, disabled: true}),
@@ -47,6 +47,8 @@ export class SalesComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    // let localInvoices: Invoice[] = JSON.parse(localStorage.getItem('invoices'))
+    // this.invoices = localInvoices.length == 0 ? [] : [...JSON.parse(localStorage.getItem('invoices'))]
     this.clientService.getAll().subscribe(
       data=> {
         this.clients=data;
@@ -116,17 +118,30 @@ export class SalesComponent implements OnInit {
         client : this.client
       })
 
+
+
       this.invoiceForm.get('invoice').reset({
         Date: {value: this.invoiceForm.get('invoice.Date').value ,disabled: true},
         Client: {value: this.invoiceForm.get('invoice.Client').value, disabled: true},
-        Number: {value: this.invoiceForm.get('invoice.Number').value, disabled: true},
+        Number: {value: this.invoiceForm.get('invoice.Number').value + 1, disabled: true},
         Quantity: {value: null, disabled: true},
         Sell: {value: null, disabled: true},
-        Item: null,
+        Item: 0,
         Total: null
       })
-    }
+      // localStorage.setItem('invoices', JSON.stringify(this.invoices))
 
+      this.items.splice(this.items.findIndex(c => c.id === parseInt(this.invoiceForm.get('invoice.Item').value)), 1)
+    }
+  }
+
+
+  saveAllInvoices(){
+    if (this.invoices.length)
+      this.invoiceService.Insert(this.invoices).subscribe(
+        res =>  this.popup = true,
+        err => console.log(err)
+      );
   }
 
 }

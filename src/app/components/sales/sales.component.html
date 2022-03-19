@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="px-3">
-                                        <form class="form form-horizontal" [formGroup]="invoiceForm">
+                                        <form class="form form-horizontal" [formGroup]="invoiceForm" (ngSubmit)="saveAllInvoices()">
                                             <div formGroupName="invoice">
                                                 <div class="form-body">
                                                     <h4 class="form-section">
@@ -160,7 +160,7 @@
                                                 <button type="button" class="btn btn-danger mr-1">
                                               <i class="icon-trash"></i> Cancel
                                           </button>
-                                                <button type="button" class="btn btn-success" (click)="{popup}">
+                                                <button type="submit" class="btn btn-success" (click)="{popup}">
                                               <i class="icon-note"></i> Save
                                           </button>
                                                 <div class="overlay" *ngIf="popup">
