@@ -73,7 +73,8 @@ export class CategoriesComponent implements OnInit {
         remainingQuantity: this.categoryForm.value.quantity
       }).subscribe(
         data => console.log(data)
-      )
+        )
+        this.popup=true
     }
     console.log(this.categoryForm)
   }

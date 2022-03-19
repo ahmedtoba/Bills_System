@@ -36,6 +36,7 @@ export class ClientsComponent implements OnInit {
     }
     saveClient(){
       if(this.clientForm.valid){
+        this.popup=true
         this.clientService.Insert({
           id:this.clientNumber,
           name: this.clientForm.value.name,

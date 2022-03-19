@@ -40,6 +40,7 @@ export class SpeciesComponent implements OnInit {
   }
   saveCompanyType(){
     if(this.speciesForm.valid){
+      this.popup=true
       this.companyTypeService.Insert({
         id:0,
         notes: this.speciesForm.value.notes,
