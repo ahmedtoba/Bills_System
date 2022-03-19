@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Client } from 'src/app/models/client.model';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
+import { TotalBill } from 'src/app/models/total-bill.model';
 import { CategoryService } from 'src/app/Services/category/category.service';
 import { ClientService } from 'src/app/Services/Client/client.service';
 import { InvoiceService } from 'src/app/Services/invoice/invoice.service';
+import { TotalBillsService } from 'src/app/Services/total-bills.service';
 
 
 @Component({
@@ -21,6 +23,11 @@ export class SalesComponent implements OnInit {
   remainquantity:number=0;
   item: Item;
   client: Client;
+  totalBills: number=0;
+  net:number;
+
+  percentDisabled = false;
+  valueDisabled = false;
 
   invoices: Invoice[] = [];
 
@@ -38,12 +45,21 @@ export class SalesComponent implements OnInit {
       'Sell':new FormControl({value:null, disabled: true},[Validators.required]),
       'Number':new FormControl({value: null, disabled: true}),
       'Total': new FormControl({value:null, disabled:true})
+    }),
+    'otherDetails' : new FormGroup({
+      'totalBills': new FormControl({value: 0, disabled:true}, Validators.required),
+      'percentDiscount': new FormControl(0, [Validators.min(0), Validators.max(100)]),
+      'valueDiscount': new FormControl(0, [Validators.min(0), this.maxValueValidator.bind(this)]),
+      'net': new FormControl({value:null, disabled:true}, Validators.required),
+      'paidUp': new FormControl(null, [Validators.min(0), this.maxPaidUpValueValidator.bind(this), Validators.required]),
+      'rest': new FormControl({value:null, disabled:true}, Validators.required)
     })
   });
 
   constructor(private clientService:ClientService,
     private categoryService:CategoryService,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    private totalBillService: TotalBillsService
     ) { }
 
   ngOnInit(): void {
@@ -116,9 +132,19 @@ export class SalesComponent implements OnInit {
         sellingPrice: parseInt(this.invoiceForm.get('invoice.Sell').value),
         item: this.item,
         client : this.client
-      })
+      });
 
+      this.invoiceForm.get('otherDetails').patchValue({
+        totalBills: this.invoiceForm.get('otherDetails.totalBills').value +
+                    this.invoiceForm.get('invoice.Total').value,
+        net: this.invoiceForm.get('otherDetails.totalBills').value +
+            this.invoiceForm.get('invoice.Total').value,
+        rest: this.invoiceForm.get('otherDetails.totalBills').value +
+        this.invoiceForm.get('invoice.Total').value
+      });
 
+      this.totalBills = this.invoiceForm.get('otherDetails.totalBills').value
+      this.net = this.invoiceForm.get('otherDetails.net').value
 
       this.invoiceForm.get('invoice').reset({
         Date: {value: this.invoiceForm.get('invoice.Date').value ,disabled: true},
@@ -135,13 +161,66 @@ export class SalesComponent implements OnInit {
     }
   }
 
-
   saveAllInvoices(){
-    if (this.invoices.length)
+    if (this.invoiceForm.get('otherDetails').valid){
+
       this.invoiceService.Insert(this.invoices).subscribe(
-        res =>  this.popup = true,
+        res =>  console.log(res),
         err => console.log(err)
       );
+
+      let totalBill : TotalBill = {
+        id:0,
+        total: this.invoiceForm.get('otherDetails.totalBills').value,
+        paid: this.invoiceForm.get('otherDetails.paidUp').value,
+        valueDiscount: this.invoiceForm.get('otherDetails.valueDiscount').value,
+        percentageDiscount: this.invoiceForm.get('otherDetails.percentDiscount').value,
+        net: this.invoiceForm.get('otherDetails.net').value,
+        date: this.invoiceForm.get('invoice.Date').value,
+        clientId: this.invoiceForm.get('invoice.Client').value
+      }
+
+      this.totalBillService.insert(totalBill).subscribe(
+        res => console.log(res)
+      )
+      this.popup = true
+    }
+  }
+
+  maxValueValidator(control: FormControl): {[k: string]: boolean} {
+    if (this.totalBills !=0 && control.value > this.totalBills)
+      return {'max': true};
+    return null
+  }
+  maxPaidUpValueValidator(control: FormControl): {[k: string]: boolean} {
+    if (this.net !=0 && control.value > this.net)
+      return {'max': true}
+    return null
+  }
+
+  onValueInput(){
+    this.invoiceForm.get('otherDetails').patchValue({
+      percentDiscount: (this.invoiceForm.get('otherDetails.valueDiscount').value/this.totalBills)*100,
+      net: (this.totalBills - this.invoiceForm.get('otherDetails.valueDiscount').value),
+      rest: (this.totalBills - this.invoiceForm.get('otherDetails.valueDiscount').value)
+    });
+    this.net = this.invoiceForm.get('otherDetails.net').value
+  }
+
+  onPercentageInput(){
+    this.invoiceForm.get('otherDetails').patchValue({
+      valueDiscount: this.totalBills * this.invoiceForm.get('otherDetails.percentDiscount').value / 100,
+      net: (this.totalBills - this.invoiceForm.get('otherDetails.percentDiscount').value * this.totalBills /100),
+      rest: (this.totalBills - this.invoiceForm.get('otherDetails.percentDiscount').value * this.totalBills /100)
+    });
+    this.net = this.invoiceForm.get('otherDetails.net').value
+  }
+
+  onPaidUpInput(){
+    this.invoiceForm.get('otherDetails').patchValue({
+      rest: this.invoiceForm.get('otherDetails.net').value - this.invoiceForm.get('otherDetails.paidUp').value
+    });
   }
 
 }
+
