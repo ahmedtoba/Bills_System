@@ -31,13 +31,16 @@ export class TypeComponent implements OnInit {
   }
 
   saveType(){
-    this.typeService.Insert({
-      id: 0,
-      name: this.typeForm.value.name,
-    }).subscribe(respone => {
-      console.log(respone);
+    if(this.typeForm.valid){
+      this.popup=true
+      this.typeService.Insert({
+        id: 0,
+        name: this.typeForm.value.name,
+      }).subscribe(respone => {
+        console.log(respone);
 
     })
+  }
     this.typeForm.reset()
   }
 

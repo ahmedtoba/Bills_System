@@ -31,7 +31,7 @@ export class CompanyDataComponent implements OnInit {
   }
 
   saveCompanyData(){
-    if (this.companyForm.valid)
+    if (this.companyForm.valid){
       this.companyService.Insert({
         id: 0,
         name:this.companyForm.value.name,
@@ -39,6 +39,8 @@ export class CompanyDataComponent implements OnInit {
       }).subscribe(
         response => console.log(response)
       )
+      this.popup = true
+    }
     this.companyForm.reset()
   }
 

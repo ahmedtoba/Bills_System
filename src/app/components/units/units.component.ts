@@ -31,7 +31,8 @@ export class UnitsComponent implements OnInit {
       )
     }
     saveUnit(){
-      if (this.unitForm.valid)
+      if (this.unitForm.valid){
+        this.popup=true
         this.unitService.Insert({
           id: 0,
           name:this.unitForm.value.name,
@@ -39,6 +40,7 @@ export class UnitsComponent implements OnInit {
         }).subscribe(
           response => console.log(response)
         )
+      }
       this.unitForm.reset()
     }
     nameIsRequired(control:FormControl):{[msg:string]:boolean}{
