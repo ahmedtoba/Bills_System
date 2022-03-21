@@ -12,6 +12,7 @@ import { ClientService } from 'src/app/Services/Client/client.service';
 export class ClientsComponent implements OnInit {
   clientNumber: number;
   clients: Client[]= []
+  isSubmiited = false;
 
    //saved action
    popup = false
@@ -35,6 +36,7 @@ export class ClientsComponent implements OnInit {
         });
     }
     saveClient(){
+      this.isSubmiited= true
       if(this.clientForm.valid){
         this.popup=true
         this.clientService.Insert({
