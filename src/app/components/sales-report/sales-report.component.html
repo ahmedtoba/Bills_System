@@ -16,35 +16,74 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="px-3">
-                                        <form class="form form-horizontal">
+                                        <form class="form form-horizontal" [formGroup]="dateForm" (ngSubmit)="getReports()">
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="projectinput7">Choose a period
                                               : </label>
                                                 <div class="col-md-9">
-                                                    <select id="projectinput7" name="budget" class="form-control">
-                                                  <option value="0" selected="" disabled="">From</option>
-                                                  <option value="company1">20-2-2022</option>
-                                                  <option value="company2">10-3-2022</option>
-
-                                              </select>
-                                                </div>
+                                                    <input type="date" id="projectinput7" name="budget" formControlName="startDate" class="form-control" (input)="reportsFound = true">
+                                                    <span class="ml-2 help-block text-danger"
+                                                      *ngIf="(dateForm.get('startDate').touched && dateForm.get('startDate').errors?.['required']) ||
+                                                      (submitted && dateForm.get('endDate').errors?.['required'])">
+                                                      Choose Start Date
+                                                    </span>
+                                                  </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput7">Choose a period
+                                                <label class="col-md-3 label-control" for="projectinput8">Choose a period
                                               : </label>
                                                 <div class="col-md-9">
-                                                    <select id="projectinput7" name="budget" class="form-control">
-                                                  <option value="0" selected="" disabled="">to</option>
-                                                  <option value="company1">20-2-2022</option>
-                                                  <option value="company2">10-3-2022</option>
-
-                                              </select>
+                                                  <input type="date" id="projectinput8" name="budget" formControlName="endDate" class="form-control" (input)="reportsFound = true">
+                                                  <span class="ml-2 help-block text-danger"
+                                                    *ngIf="(dateForm.get('endDate').touched && dateForm.get('endDate').errors?.['required']) ||
+                                                    (submitted && dateForm.get('endDate').errors?.['required'])">
+                                                    Choose End Date
+                                                  </span>
                                                 </div>
                                             </div>
 
+                                            <div class="form-actions">
+                                                <button type="button" class="btn btn-danger mr-1">
+                                                      <i class="icon-trash"></i> Cancel
+                                                  </button>
+                                                <button type="submit" class="btn btn-success" (click)="{popup}">
+                                                      <i class="icon-note"></i> Get All Reports
+                                                  </button>
+                                            </div>
+                                            <table class="table table-hover" *ngIf="filteredReports.length">
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">#</th>
+                                                  <th scope="col">Client Name</th>
+                                                  <th scope="col">Date</th>
+                                                  <th scope="col">Total Bills</th>
+                                                  <th scope="col">Discount %</th>
+                                                  <th scope="col">Net</th>
+                                                  <th scope="col">Paid</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr *ngFor="let report of filteredReports; let i = index">
+                                                  <th scope="row">{{i+1}}</th>
+                                                  <td>{{report.client.name}}</td>
+                                                  <td>{{report.date | date}}</td>
+                                                  <td>{{report.total}}</td>
+                                                  <td>{{report.percentageDiscount}}</td>
+                                                  <td>{{report.net}}</td>
+                                                  <td>{{report.paid}}</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <div class="ml-4 pb-3">
+                                              <span class="help-block text-danger"
+                                                *ngIf="!reportsFound && dateForm.get('startDate').dirty && dateForm.get('endDate').dirty">No Reports Found in this Period
+                                              </span>
+                                            </div>
+                                        </form>
 
 
-
+<!--
+<<<<<<< Updated upstream
 
                                         </form>
                                     </div>
@@ -56,7 +95,19 @@
                                         <button type="button" class="btn btn-success" (click)="{popup}">
                                               <i class="icon-note"></i> Save
                                           </button>
-                                    </div>
+=======
+                                        <div class="overlay" *ngIf="popup">
+                                            <div class="popup">
+                                                <h2>saved</h2>
+                                                <a class="close" (click)="popup = false">&times;</a>
+                                                <div class="content">
+                                                    <img src="assets/img/saved.png" style="width: 100px;">
+                                                </div>
+                                            </div>
+                                        </div>
+>>>>>>> Stashed changes
+                                     -->
+                              </div>
 
                                 </div>
 

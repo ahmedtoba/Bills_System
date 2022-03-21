@@ -7,7 +7,7 @@ import { TotalBill } from '../models/total-bill.model';
 })
 export class TotalBillsService {
 
-  baseUrl = 'http://localhost:55245/api/TotalBill'
+  private baseUrl = 'http://localhost:55245/api/TotalBill'
   constructor(private http: HttpClient) { }
 
   getAll() {

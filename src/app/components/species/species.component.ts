@@ -40,22 +40,20 @@ export class SpeciesComponent implements OnInit {
   }
   saveCompanyType(){
     if(this.speciesForm.valid){
-      this.popup=true
       this.companyTypeService.Insert({
         id:0,
         notes: this.speciesForm.value.notes,
         companyId: this.speciesForm.value.company,
         typeId: this.speciesForm.value.type
       }).subscribe(
-        response => {
-          console.log(response)
-        });
+        response => this.popup = true
+        );
       this.speciesForm.reset()
     }
   }
   typeIsUnique(control:FormControl):{[msg:string]:boolean}{
     for(let companyType of this.companytypes){
-      if(companyType.companyId == this.speciesForm.value.company && companyType.typeId == this.speciesForm.value.type){
+      if(companyType.companyId == this.speciesForm.value.company && companyType.typeId == control.value){
         return {'exists': true}
       }
     }
