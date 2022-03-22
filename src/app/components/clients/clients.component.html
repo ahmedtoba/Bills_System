@@ -22,7 +22,7 @@
                                                 <label class="col-md-3 label-control" for="projectinput9">Client Name : </label>
                                                 <div class="col-md-9">
                                                     <input type="text" id="projectinput9" class="form-control" name="Name" formControlName="name">
-                                                    <span class="help-block text-danger ml-2" *ngIf="clientForm.get('name').touched && clientForm.get('name').hasError('required')">Client name is required</span>
+                                                    <span class="help-block text-danger ml-2" *ngIf="(clientForm.get('name').touched && clientForm.get('name').hasError('required')) || (clientForm.get('name').untouched && isSubmiited)">Client name is required</span>
                                                     <span class="help-block text-danger ml-2" *ngIf="clientForm.get('name').touched && clientForm.get('name').hasError('exists')">Client name is already exists</span>
                                                 </div>
                                             </div>
@@ -30,7 +30,7 @@
                                                 <label class="col-md-3 label-control" for="projectinput9">Phone : </label>
                                                 <div class="col-md-9">
                                                     <input type="text" id="projectinput9" class="form-control" name="phoneNumber" formControlName="phoneNumber" pattern="^(\d{14})$" autocomplete="off">
-                                                    <span class="help-block text-danger ml-2" *ngIf="clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('required')">Phone Number is required</span>
+                                                    <span class="help-block text-danger ml-2" *ngIf="(clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('required')) || (clientForm.get('phoneNumber').untouched && isSubmiited)">Phone Number is required</span>
                                                     <span class="help-block text-danger ml-2" *ngIf="clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('exists')">Phone Number is already exists</span>
                                                     <span class="help-block text-danger ml-2" *ngIf="clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('pattern')">Phone Number must be 14 digits</span>
                                                 </div>
@@ -45,7 +45,7 @@
                                                 <label class="col-md-3 label-control" for="projectinput9">Address: </label>
                                                 <div class="col-md-9">
                                                     <input type="text" id="projectinput9" class="form-control" name="Address" formControlName="address">
-                                                    <span class="help-block ml-2 text-danger" *ngIf="clientForm.get('address').touched && clientForm.get('address').hasError('required')">Address is required</span>
+                                                    <span class="help-block ml-2 text-danger" *ngIf="(clientForm.get('address').touched && clientForm.get('address').hasError('required')) || (clientForm.get('address').untouched && isSubmiited)">Address is required</span>
                                                     <span class="help-block ml-2 text-danger" *ngIf="clientForm.get('address').touched && clientForm.get('address').hasError('exists')">Address is already exists</span>
                                                 </div>
                                             </div>
