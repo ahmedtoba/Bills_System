@@ -30,7 +30,7 @@
                             </label>
                                                         <div class="col-md-9">
                                                             <input type="date" id="projectinput1" class="form-control" name="fname" formControlName="Date" />
-                                                            <span class="ml-2 help-block text-danger" *ngIf="invoiceForm.get('invoice.Date').touched && invoiceForm.get('invoice.Date').errors?.['required']">Bill Date is required</span
+                                                            <span class="ml-2 help-block text-danger" *ngIf="(invoiceForm.get('invoice.Date').touched && invoiceForm.get('invoice.Date').errors?.['required']) || (invoiceForm.get('invoice.Date').untouched && isAdded )">Bill Date is required</span
                               >
                             </div>
                           </div>
@@ -128,7 +128,7 @@
                               />
                               <span
                                 class="ml-2 help-block text-danger"
-                                *ngIf="invoiceForm.get('invoice.Sell').touched && invoiceForm.get('invoice.Sell').errors?.['required']"
+                                *ngIf="(invoiceForm.get('invoice.Sell').touched && invoiceForm.get('invoice.Sell').errors?.['required']) || (invoiceForm.get('invoice.Sell').untouched && isAdded )"
                                 >Selling Price is required</span
                               >
                             </div>
@@ -150,7 +150,7 @@
                               />
                               <span
                                 class="ml-2 help-block text-danger"
-                                *ngIf="invoiceForm.get('invoice.Quantity').touched && invoiceForm.get('invoice.Quantity').errors?.['required']"
+                                *ngIf="(invoiceForm.get('invoice.Quantity').touched && invoiceForm.get('invoice.Quantity').errors?.['required']) || (invoiceForm.get('invoice.Quantity').untouched && isAdded)"
                                 >Quantity is required</span
                               >
                               <span

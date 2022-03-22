@@ -17,6 +17,7 @@ export class SpeciesComponent implements OnInit {
   companies: Company[]=[];
   types: Type[]=[]
   companytypes: CompanyType[]=[]
+  isSubmitted = false
    //saved action
    popup = false
    name = 'Angular';
@@ -39,6 +40,7 @@ export class SpeciesComponent implements OnInit {
       )
   }
   saveCompanyType(){
+    this.isSubmitted = true
     if(this.speciesForm.valid){
       this.companyTypeService.Insert({
         id:0,

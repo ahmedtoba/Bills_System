@@ -11,6 +11,7 @@ import { UnitService } from 'src/app/Services/Unit/unit.service';
 export class UnitsComponent implements OnInit {
 
     units: Unit[]=[];
+    isSubmitted = false
 
      //saved action
   popup = false
@@ -31,6 +32,7 @@ export class UnitsComponent implements OnInit {
       )
     }
     saveUnit(){
+      this.isSubmitted = true
       if (this.unitForm.valid){
         this.popup=true
         this.unitService.Insert({

@@ -11,10 +11,6 @@ import { TotalBillsService } from 'src/app/Services/total-bills.service';
 })
 export class SalesReportComponent implements OnInit {
 
-  //saved action
-  popup = false
-  name = 'Angular';
-  //---------
 
   reports: TotalBill[] = []
   filteredReports: TotalBill[] = []

@@ -10,6 +10,7 @@ import { TypeService } from 'src/app/Services/Type/type.service';
 })
 export class TypeComponent implements OnInit {
   types: Type[] = [];
+  isSubmitted = false
 
    //saved action
    popup = false
@@ -31,6 +32,7 @@ export class TypeComponent implements OnInit {
   }
 
   saveType(){
+    this.isSubmitted = true
     if(this.typeForm.valid){
       this.popup=true
       this.typeService.Insert({

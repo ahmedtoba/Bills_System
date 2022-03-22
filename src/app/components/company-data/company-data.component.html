@@ -22,7 +22,7 @@
                                                 <label class="col-md-3 label-control" for="projectinput9">Company Name : </label>
                                                 <div class="col-md-9">
                                                     <input formControlName="name" type="text" id="projectinput9" class="form-control" name="name">
-                                                    <span class="ml-2 help-block text-danger" *ngIf="companyForm.get('name')?.touched && companyForm.get('name')?.hasError('required')">Company name is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(companyForm.get('name')?.touched && companyForm.get('name')?.hasError('required')) || (companyForm.get('name').untouched && isSubmitted)">Company name is required</span>
                                                     <span class="ml-2 help-block text-danger" *ngIf="companyForm.get('name')?.touched && companyForm.get('name')?.hasError('exists')">Company name already exists</span>
                                                 </div>
                                             </div>

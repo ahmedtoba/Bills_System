@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Client } from 'src/app/models/client.model';
@@ -30,6 +31,8 @@ export class SalesComponent implements OnInit {
   valueDisabled = false;
 
   invoices: Invoice[] = [];
+  isAdded = false
+  isSubmitted = false
 
   //saved action
    popup = false
@@ -121,6 +124,7 @@ export class SalesComponent implements OnInit {
   }
 
   onInvoiceAdded(){
+    this.isAdded = true
     if(this.invoiceForm.get('invoice').valid){
       this.invoices.push({
         id: parseInt(this.invoiceForm.get('invoice.Number').value),
@@ -162,12 +166,16 @@ export class SalesComponent implements OnInit {
   }
 
   saveAllInvoices(){
+    this.isSubmitted = true
+    this.isAdded = true
     if (this.invoiceForm.get('otherDetails').valid){
 
       this.invoiceService.Insert(this.invoices).subscribe(
-        res =>  console.log(res),
-        err => console.log(err)
-      );
+        res =>  {this.popup=true, console.log(res);
+        },
+        err => {this.popup=false, console.log(err);
+        }
+        );
 
       let totalBill : TotalBill = {
         id:0,
@@ -183,7 +191,7 @@ export class SalesComponent implements OnInit {
       this.totalBillService.insert(totalBill).subscribe(
         res => console.log(res)
       )
-      this.popup = true
+
     }
   }
 
