@@ -12,7 +12,10 @@ import { ClientService } from 'src/app/Services/Client/client.service';
 export class ClientsComponent implements OnInit {
   clientNumber: number;
   clients: Client[]= []
-  isSubmiited = false;
+  isSubmitted = false;
+  nameActive = false;
+  phoneActive = false;
+  addressActive = false;
 
    //saved action
    popup = false
@@ -34,25 +37,36 @@ export class ClientsComponent implements OnInit {
         });
     }
     saveClient(){
-      this.isSubmiited= true
+      this.isSubmitted= true
       if(this.clientForm.valid){
-        this.popup=true
         this.clientService.Insert({
           id:this.clientNumber,
           name: this.clientForm.value.name,
           phoneNumber: this.clientForm.value.phoneNumber,
           address: this.clientForm.value.address
         }).subscribe(
-          data => console.log(data)
+          response => {
+            this.popup=true;
+            this.isSubmitted = false;
+            this.nameActive = false;
+            this.addressActive = false;
+            this.phoneActive = false;
+            this.clients.push({
+              id:this.clientNumber,
+              name: this.clientForm.value.name,
+              phoneNumber: this.clientForm.value.phoneNumber,
+              address: this.clientForm.value.address
+            })
+            this.clientForm.reset();
+            this.clientNumber++;
+          }
         )
-        this.clientForm.reset();
-        this.clientNumber++;
       }
       console.log(this.clientForm)
     }
     nameIsUnique(control:FormControl):{[msg:string]:boolean}{
       for(let client of this.clients){
-        if(client.name == control.value)
+        if(client.name.toLowerCase() == control.value?.toLowerCase())
         return {'exists' : true}
       }
       return null;

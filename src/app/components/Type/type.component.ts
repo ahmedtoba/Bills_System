@@ -34,21 +34,21 @@ export class TypeComponent implements OnInit {
   saveType(){
     this.isSubmitted = true
     if(this.typeForm.valid){
-      this.popup=true
       this.typeService.Insert({
         id: 0,
         name: this.typeForm.value.name,
       }).subscribe(respone => {
-        console.log(respone);
-
+        this.popup=true,
+        this.isSubmitted = false;
+        this.types.push({name: this.typeForm.value.name, id: 0})
+        this.typeForm.reset()
     })
   }
-    this.typeForm.reset()
   }
 
   nameIsUnique(control: FormControl) : {[msg: string] : boolean} {
     for(let type of this.types){
-      if (type.name === control.value)
+      if (type.name.toLowerCase() === control.value?.toLowerCase())
         return {'exists': true}
     }
     return null;
