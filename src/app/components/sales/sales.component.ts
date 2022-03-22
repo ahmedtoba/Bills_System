@@ -27,12 +27,18 @@ export class SalesComponent implements OnInit {
   totalBills: number=0;
   net:number;
 
+  //for Displaying Validation while typing in the input witout the need for going out of the input
+  isSubmitted = false
+  quantityActive = false;
+  percentActive = false;
+  valueActive = false;
+  paidUpActive = false;
+
   percentDisabled = false;
   valueDisabled = false;
 
   invoices: Invoice[] = [];
   isAdded = false
-  isSubmitted = false
 
   //saved action
    popup = false
@@ -42,8 +48,8 @@ export class SalesComponent implements OnInit {
   invoiceForm:FormGroup = new FormGroup({
     'invoice' : new FormGroup({
       'Date':new FormControl(null,[Validators.required]),
-      'Client':new FormControl(0,[Validators.required]),
-      'Item':new FormControl(0,[Validators.required]),
+      'Client':new FormControl(null,[Validators.required]),
+      'Item':new FormControl(null,[Validators.required]),
       'Quantity':new FormControl({value:null, disabled: true},[Validators.required,this.CheckQuantity.bind(this)]),
       'Sell':new FormControl({value:null, disabled: true},[Validators.required]),
       'Number':new FormControl({value: null, disabled: true}),
@@ -53,8 +59,8 @@ export class SalesComponent implements OnInit {
       'totalBills': new FormControl({value: 0, disabled:true}, Validators.required),
       'percentDiscount': new FormControl(0, [Validators.min(0), Validators.max(100)]),
       'valueDiscount': new FormControl(0, [Validators.min(0), this.maxValueValidator.bind(this)]),
-      'net': new FormControl({value:null, disabled:true}, Validators.required),
-      'paidUp': new FormControl(null, [Validators.min(0), this.maxPaidUpValueValidator.bind(this), Validators.required]),
+      'net': new FormControl({value:null, disabled:true}, [Validators.min(0), Validators.required]),
+      'paidUp': new FormControl(0, [Validators.min(0), this.maxPaidUpValueValidator.bind(this)]),
       'rest': new FormControl({value:null, disabled:true}, Validators.required)
     })
   });
@@ -112,6 +118,7 @@ export class SalesComponent implements OnInit {
     }
 
   TotalPrice(){
+    this.quantityActive= true;
     this.invoiceForm.get('invoice').patchValue(
       {Total: parseInt(this.invoiceForm.get('invoice.Quantity').value) * parseInt(this.invoiceForm.get('invoice.Sell').value) }
     )
@@ -125,7 +132,9 @@ export class SalesComponent implements OnInit {
 
   onInvoiceAdded(){
     this.isAdded = true
+
     if(this.invoiceForm.get('invoice').valid){
+      this.quantityActive = false;
       this.invoices.push({
         id: parseInt(this.invoiceForm.get('invoice.Number').value),
         itemId: this.invoiceForm.get('invoice.Item').value,
@@ -166,21 +175,18 @@ export class SalesComponent implements OnInit {
   }
 
   saveAllInvoices(){
-    this.isSubmitted = true
-    this.isAdded = true
-    if (this.invoiceForm.get('otherDetails').valid){
+    this.isSubmitted = true;
+    this.isAdded = true;
+    if (this.invoiceForm.get('otherDetails').valid && this.invoices.length){
 
       this.invoiceService.Insert(this.invoices).subscribe(
-        res =>  {this.popup=true, console.log(res);
-        },
-        err => {this.popup=false, console.log(err);
-        }
+        res =>  {}
         );
 
       let totalBill : TotalBill = {
         id:0,
         total: this.invoiceForm.get('otherDetails.totalBills').value,
-        paid: this.invoiceForm.get('otherDetails.paidUp').value,
+        paid: this.invoiceForm.get('otherDetails.paidUp').value ? this.invoiceForm.get('otherDetails.paidUp').value : 0,
         valueDiscount: this.invoiceForm.get('otherDetails.valueDiscount').value,
         percentageDiscount: this.invoiceForm.get('otherDetails.percentDiscount').value,
         net: this.invoiceForm.get('otherDetails.net').value,
@@ -189,7 +195,13 @@ export class SalesComponent implements OnInit {
       }
 
       this.totalBillService.insert(totalBill).subscribe(
-        res => console.log(res)
+        res =>{
+          this.popup=true;
+          this.percentActive = false;
+          this.paidUpActive = false;
+          this.valueActive = false;
+          this.invoices = [];
+        }
       )
 
     }
@@ -207,6 +219,7 @@ export class SalesComponent implements OnInit {
   }
 
   onValueInput(){
+    this.valueActive = true;
     this.invoiceForm.get('otherDetails').patchValue({
       percentDiscount: (this.invoiceForm.get('otherDetails.valueDiscount').value/this.totalBills)*100,
       net: (this.totalBills - this.invoiceForm.get('otherDetails.valueDiscount').value),
@@ -216,6 +229,7 @@ export class SalesComponent implements OnInit {
   }
 
   onPercentageInput(){
+    this.percentActive = true;
     this.invoiceForm.get('otherDetails').patchValue({
       valueDiscount: this.totalBills * this.invoiceForm.get('otherDetails.percentDiscount').value / 100,
       net: (this.totalBills - this.invoiceForm.get('otherDetails.percentDiscount').value * this.totalBills /100),
@@ -225,9 +239,15 @@ export class SalesComponent implements OnInit {
   }
 
   onPaidUpInput(){
+    this.paidUpActive = true;
     this.invoiceForm.get('otherDetails').patchValue({
       rest: this.invoiceForm.get('otherDetails.net').value - this.invoiceForm.get('otherDetails.paidUp').value
     });
+  }
+
+  popUp(){
+    this.popup = false;
+    window.location.reload()
   }
 
 }
