@@ -18,15 +18,14 @@
                                     <div class="px-3">
                                         <form class="form form-horizontal" [formGroup]="speciesForm" (ngSubmit)="saveCompanyType()">
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput7">Company Name: </label>
+                                                <label class="col-md-3 label-control" for="projectinput6">Company Name: </label>
                                                 <div class="col-md-9">
-                                                    <select id="projectinput7" name="budget" class="form-control" formControlName="company">
+                                                    <select id="projectinput6" name="budget" class="form-control" formControlName="company">
                                                   <option [value]="null" selected="" disabled="">choose from Companies</option>
 
                                                       <option [value]="company.id" *ngFor="let company of companies">{{company.name}}</option>
                                               </select>
-                                                    <span class="text-danger ml-2 help-block" *ngIf="(speciesForm.get('company').touched && speciesForm.get('company').hasError('required')) || (speciesForm.get('company').untouched && isSubmitted)">
-
+                                                    <span class="text-danger ml-2 help-block" *ngIf="(speciesForm.get('company').touched && speciesForm.get('company').hasError('required')) || (speciesForm.get('company').hasError('required') && isSubmitted)">
                                                 company name is required
                                               </span>
                                                 </div>
@@ -40,11 +39,11 @@
 
                                                     <option [value]="type.id" *ngFor="let type of types">{{type.name}}</option>
                                             </select>
-                                                    <span class="text-danger ml-2 help-block" *ngIf="(speciesForm.get('type').touched && speciesForm.get('type').hasError('required')) || (speciesForm.get('type').untouched && isSubmitted)">
+                                                    <span class="text-danger ml-2 help-block" *ngIf="(speciesForm.get('type').touched && speciesForm.get('type').hasError('required')) || (speciesForm.get('type').hasError('required') && isSubmitted)">
                                               type name is required
                                             </span>
-                                                    <span class="text-danger ml-2 help-block" *ngIf="speciesForm.get('type').hasError('exists')">
-                                              type name is exists
+                                                    <span class="text-danger ml-2 help-block" *ngIf="speciesForm.get('type')?.hasError('exists')">
+                                              Type name already exists
                                             </span>
                                                 </div>
                                             </div>

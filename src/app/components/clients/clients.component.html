@@ -11,47 +11,46 @@
                                 <div class="card-header">
                                     <div class="card-title-wrap bar-success">
                                         <h4 class="card-title" id="horz-layout-basic">Clients</h4>
-                                    </div>
-                                    <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
+                                      </div>
+                                      <p class="mb-0">This is the basic horizontal form with labels on left and cost estimation form is the default position.</p>
                                 </div>
                                 <div class="card-body">
                                     <div class="px-3">
-                                        <form class="form form-horizontal" [formGroup]="clientForm" (ngSubmit)="saveClient()">
+                                      <form class="form form-horizontal" [formGroup]="clientForm" (ngSubmit)="saveClient()" autocomplete="off">
 
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">Client Name : </label>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control" for="projectinput8">Client Number : </label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="projectinput8" class="form-control" name="Id" [value]="clientNumber" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                                <label class="col-md-3 label-control" for="projectinput7">Client Name : </label>
                                                 <div class="col-md-9">
-                                                    <input type="text" id="projectinput9" class="form-control" name="Name" formControlName="name">
-                                                    <span class="help-block text-danger ml-2" *ngIf="(clientForm.get('name').touched && clientForm.get('name').hasError('required')) || (clientForm.get('name').untouched && isSubmiited)">Client name is required</span>
-                                                    <span class="help-block text-danger ml-2" *ngIf="clientForm.get('name').touched && clientForm.get('name').hasError('exists')">Client name is already exists</span>
+                                                    <input type="text" id="projectinput7" class="form-control" name="Name" formControlName="name" (input)="nameActive = true">
+                                                    <span class="help-block text-danger ml-2" *ngIf="(clientForm.get('name').touched && clientForm.get('name').hasError('required')) || (clientForm.get('name').hasError('required') && isSubmitted)">Client name is required</span>
+                                                    <span class="help-block text-danger ml-2" *ngIf="(clientForm.get('name').touched && clientForm.get('name').hasError('exists')) || (clientForm.get('name').hasError('exists') && nameActive)">Client name already exists</span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="projectinput9">Phone : </label>
                                                 <div class="col-md-9">
-                                                    <input type="text" id="projectinput9" class="form-control" name="phoneNumber" formControlName="phoneNumber" pattern="^(\d{14})$" autocomplete="off">
-                                                    <span class="help-block text-danger ml-2" *ngIf="(clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('required')) || (clientForm.get('phoneNumber').untouched && isSubmiited)">Phone Number is required</span>
-                                                    <span class="help-block text-danger ml-2" *ngIf="clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('exists')">Phone Number is already exists</span>
-                                                    <span class="help-block text-danger ml-2" *ngIf="clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('pattern')">Phone Number must be 14 digits</span>
+                                                    <input type="text" id="projectinput9" class="form-control" name="phoneNumber" formControlName="phoneNumber" pattern="^(\d{14})$" (input)="phoneActive = true">
+                                                    <span class="help-block text-danger ml-2" *ngIf="(clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('required')) || (clientForm.get('phoneNumber').hasError('required') && isSubmitted)">Phone Number is required</span>
+                                                    <span class="help-block text-danger ml-2" *ngIf="(clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('exists')) || (clientForm.get('phoneNumber').hasError('exists') && phoneActive)">Phone Number is already exists</span>
+                                                    <span class="help-block text-danger ml-2" *ngIf="(clientForm.get('phoneNumber').touched && clientForm.get('phoneNumber').hasError('pattern')) || (phoneActive && clientForm.get('phoneNumber').hasError('pattern') )">Phone Number must be 14 digits</span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">Number : </label>
+                                                <label class="col-md-3 label-control" for="projectinput6">Address: </label>
                                                 <div class="col-md-9">
-                                                    <input type="text" id="projectinput9" class="form-control" name="Id" [value]="clientNumber" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">Address: </label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="projectinput9" class="form-control" name="Address" formControlName="address">
-                                                    <span class="help-block ml-2 text-danger" *ngIf="(clientForm.get('address').touched && clientForm.get('address').hasError('required')) || (clientForm.get('address').untouched && isSubmiited)">Address is required</span>
-                                                    <span class="help-block ml-2 text-danger" *ngIf="clientForm.get('address').touched && clientForm.get('address').hasError('exists')">Address is already exists</span>
+                                                    <input type="text" id="projectinput6" class="form-control" name="Address" formControlName="address">
+                                                    <span class="help-block ml-2 text-danger" *ngIf="(clientForm.get('address').touched && clientForm.get('address').hasError('required')) || (clientForm.get('address').untouched && isSubmitted)">Address is required</span>
                                                 </div>
                                             </div>
 
                                             <div class="form-actions">
-                                                <button type="reset" class="btn btn-danger mr-1">
+                                                <button type="button" (click)="clientForm.reset()" class="btn btn-danger mr-1">
                                                       <i class="icon-trash"></i> Cancel
                                                   </button>
                                                 <button type="submit" class="btn btn-success" (click)="{popup}">

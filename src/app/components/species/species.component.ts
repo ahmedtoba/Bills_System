@@ -48,9 +48,18 @@ export class SpeciesComponent implements OnInit {
         companyId: this.speciesForm.value.company,
         typeId: this.speciesForm.value.type
       }).subscribe(
-        response => this.popup = true
+        response => {
+          this.popup = true;
+          this.isSubmitted = false;
+          this.companytypes.push ({
+            id:0,
+            notes: this.speciesForm.value.notes,
+            companyId: this.speciesForm.value.company,
+            typeId: this.speciesForm.value.type
+          })
+          this.speciesForm.reset()
+        }
         );
-      this.speciesForm.reset()
     }
   }
   typeIsUnique(control:FormControl):{[msg:string]:boolean}{
