@@ -15,6 +15,7 @@ export class CompanyDataComponent implements OnInit {
    popup = false
    name = 'Angular';
    //---------
+   isSubmitted = false
 
   companyForm: FormGroup = new FormGroup({
     'name': new FormControl(null, [Validators.required, this.nameIsUnique.bind(this)]),
@@ -31,6 +32,7 @@ export class CompanyDataComponent implements OnInit {
   }
 
   saveCompanyData(){
+    this.isSubmitted = true
     if (this.companyForm.valid){
       this.companyService.Insert({
         id: 0,

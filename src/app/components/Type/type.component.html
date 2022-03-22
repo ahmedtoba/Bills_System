@@ -21,7 +21,7 @@
                                                 <label class="col-md-3 label-control" for="projectinput9">Type Name : </label>
                                                 <div class="col-md-9">
                                                     <input formControlName="name" type="text" id="projectinput9" class="form-control" name="name">
-                                                    <span class="ml-2 help-block text-danger" *ngIf="typeForm.get('name').touched && typeForm.get('name').hasError('required')">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(typeForm.get('name').touched && typeForm.get('name').hasError('required')) || (typeForm.get('name').untouched && isSubmitted)">
                                                     Type Name is Required
                                                   </span>
                                                     <span class="ml-2 help-block text-danger" *ngIf="typeForm.get('name').touched && typeForm.get('name').hasError('exists')">

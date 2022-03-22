@@ -26,6 +26,7 @@ export class CategoriesComponent implements OnInit {
   popup = false
   name = 'Angular';
   //---------
+  isSubmitted = false
 
   categoryForm:FormGroup=new FormGroup({
     'company': new FormControl(null, [Validators.required,]),
@@ -59,6 +60,7 @@ export class CategoriesComponent implements OnInit {
        )
   }
   saveCategory(){
+    this.isSubmitted = true
     if(this.categoryForm.valid){
       this.categoryService.Insert({
         id:0,

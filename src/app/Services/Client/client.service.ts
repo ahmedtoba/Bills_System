@@ -19,8 +19,4 @@ export class ClientService {
   Insert(client:Client){
     return this.myClinet.post(`${this.BaseURL}`,client)
   }
-
-  newClientNumber() {
-    return this.myClinet.get<number>(`${this.BaseURL}/max`)
-  }
 }

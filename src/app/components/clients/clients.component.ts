@@ -31,8 +31,6 @@ export class ClientsComponent implements OnInit {
         data => {
           this.clients = data;
           this.clientNumber = data.length > 0 ? data.reduce((a,b) => a.id > b.id ? a: b).id + 1 : 1000
-          // if(data.length!=0)
-          //   this.clientNumber=Math.max.apply(Math, data.map(function(o) { return o.id; }))+1
         });
     }
     saveClient(){

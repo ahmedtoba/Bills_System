@@ -25,7 +25,7 @@
 
                                                       <option [value]="company.id" *ngFor="let company of companies">{{company.name}}</option>
                                               </select>
-                                                    <span class="text-danger ml-2 help-block" *ngIf="speciesForm.get('company').touched && speciesForm.get('company').hasError('required')">
+                                                    <span class="text-danger ml-2 help-block" *ngIf="(speciesForm.get('company').touched && speciesForm.get('company').hasError('required')) || (speciesForm.get('company').untouched && isSubmitted)">
 
                                                 company name is required
                                               </span>
@@ -40,7 +40,7 @@
 
                                                     <option [value]="type.id" *ngFor="let type of types">{{type.name}}</option>
                                             </select>
-                                                    <span class="text-danger ml-2 help-block" *ngIf="speciesForm.get('type').touched && speciesForm.get('type').hasError('required')">
+                                                    <span class="text-danger ml-2 help-block" *ngIf="(speciesForm.get('type').touched && speciesForm.get('type').hasError('required')) || (speciesForm.get('type').untouched && isSubmitted)">
                                               type name is required
                                             </span>
                                                     <span class="text-danger ml-2 help-block" *ngIf="speciesForm.get('type').hasError('exists')">
