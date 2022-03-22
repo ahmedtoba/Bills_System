@@ -1,36 +1,53 @@
 <div class="main-panel">
-    <div class="main-content">
-        <div class="content-wrapper">
-            <div class="container-fluid">
-                <section id="horizontal-form-layouts">
-                    <div class="row"></div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title-wrap bar-success">
-                                        <h4 class="card-title" id="horz-layout-basic">
-                                            Sales Invoice
-                                        </h4>
-                                    </div>
-                                    <p class="mb-0">
-                                        This is the basic horizontal form with labels on left and cost estimation form is the default position.
-                                    </p>
-                                </div>
-                                <div class="card-body">
-                                    <div class="px-3">
-                                        <form class="form form-horizontal" [formGroup]="invoiceForm" (ngSubmit)="saveAllInvoices()">
-                                            <div formGroupName="invoice">
-                                                <div class="form-body">
-                                                    <h4 class="form-section">
-                                                        <i class="icon-user"></i>Bills Details
-                                                    </h4>
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="projectinput1">Bills Date :
+  <div class="main-content">
+    <div class="content-wrapper">
+      <div class="container-fluid">
+        <section id="horizontal-form-layouts">
+          <div class="row"></div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title-wrap bar-success">
+                    <h4 class="card-title" id="horz-layout-basic">
+                      Sales Invoice
+                    </h4>
+                  </div>
+                  <p class="mb-0">
+                    This is the basic horizontal form with labels on left and
+                    cost estimation form is the default position.
+                  </p>
+                </div>
+                <div class="card-body">
+                  <div class="px-3">
+                    <form
+                      class="form form-horizontal"
+                      [formGroup]="invoiceForm"
+                      (ngSubmit)="saveAllInvoices()"
+                    >
+                      <div formGroupName="invoice">
+                        <div class="form-body">
+                          <h4 class="form-section">
+                            <i class="icon-user"></i>Bills Details
+                          </h4>
+                          <div class="form-group row">
+                            <label
+                              class="col-md-3 label-control"
+                              for="projectinput1"
+                              >Bills Date :
                             </label>
-                                                        <div class="col-md-9">
-                                                            <input type="date" id="projectinput1" class="form-control" name="fname" formControlName="Date" />
-                                                            <span class="ml-2 help-block text-danger" *ngIf="(invoiceForm.get('invoice.Date').touched && invoiceForm.get('invoice.Date').errors?.['required']) || (invoiceForm.get('invoice.Date').untouched && isAdded )">Bill Date is required</span
+                            <div class="col-md-9">
+                              <input
+                                type="date"
+                                id="projectinput1"
+                                class="form-control"
+                                name="fname"
+                                formControlName="Date"
+                              />
+                              <span
+                                class="ml-2 help-block text-danger"
+                                *ngIf="(invoiceForm.get('invoice.Date').touched && invoiceForm.get('invoice.Date').errors?.['required']) || (invoiceForm.get('invoice.Date').errors?.['required'] && isAdded )"
+                                >Bill Date is required</span
                               >
                             </div>
                           </div>
@@ -63,7 +80,7 @@
                                 class="form-control"
                                 formControlName="Client"
                               >
-                                <option value="0" selected="" disabled="">
+                                <option [value]="null" selected="" disabled="">
                                   Choose From Clients
                                 </option>
                                 <option
@@ -75,7 +92,7 @@
                               </select>
                               <span
                                 class="ml-2 help-block text-danger"
-                                *ngIf="invoiceForm.get('invoice.Client').touched && invoiceForm.get('invoice.Client').errors?.['required']"
+                                *ngIf="invoiceForm.get('invoice.Client').touched && invoiceForm.get('invoice.Client').errors?.['required'] || (invoiceForm.get('invoice.Client').errors?.['required'] && isAdded) "
                                 >Client Name is required</span
                               >
                             </div>
@@ -94,7 +111,7 @@
                                 (change)="sellPrice()"
                                 formControlName="Item"
                               >
-                                <option value="0" selected="" disabled="">
+                                <option [value]="null" selected="" disabled="">
                                   Choose From Species
                                 </option>
                                 <option
@@ -106,7 +123,7 @@
                               </select>
                               <span
                                 class="ml-2 help-block text-danger"
-                                *ngIf="invoiceForm.get('invoice.Item').touched && invoiceForm.get('invoice.Item').errors?.['required']"
+                                *ngIf="(invoiceForm.get('invoice.Item').touched && invoiceForm.get('invoice.Item').errors?.['required'])||(invoiceForm.get('invoice.Item').errors?.['required'] && isAdded)"
                                 >Item Name is required</span
                               >
                             </div>
@@ -128,7 +145,7 @@
                               />
                               <span
                                 class="ml-2 help-block text-danger"
-                                *ngIf="(invoiceForm.get('invoice.Sell').touched && invoiceForm.get('invoice.Sell').errors?.['required']) || (invoiceForm.get('invoice.Sell').untouched && isAdded )"
+                                *ngIf="(invoiceForm.get('invoice.Sell').touched && invoiceForm.get('invoice.Sell').errors?.['required']) || (invoiceForm.get('invoice.Sell').errors?.['required'] && isAdded )"
                                 >Selling Price is required</span
                               >
                             </div>
@@ -150,12 +167,12 @@
                               />
                               <span
                                 class="ml-2 help-block text-danger"
-                                *ngIf="(invoiceForm.get('invoice.Quantity').touched && invoiceForm.get('invoice.Quantity').errors?.['required']) || (invoiceForm.get('invoice.Quantity').untouched && isAdded)"
+                                *ngIf="(invoiceForm.get('invoice.Quantity').touched && invoiceForm.get('invoice.Quantity').errors?.['required']) || (invoiceForm.get('invoice.Quantity').errors?.['required'] && isAdded)"
                                 >Quantity is required</span
                               >
                               <span
                                 class="ml-2 help-block text-danger"
-                                *ngIf="invoiceForm.get('invoice.Quantity').touched && invoiceForm.get('invoice.Quantity').errors?.['quantityError']"
+                                *ngIf="(invoiceForm.get('invoice.Quantity').touched && invoiceForm.get('invoice.Quantity').errors?.['quantityError']) || (invoiceForm.get('invoice.Quantity').errors?.['quantityError'] && quantityActive)"
                                 >Unsufficient Quantity in the stock</span
                               >
                             </div>
@@ -185,7 +202,10 @@
                               <i class="icon-note"></i> Add
                             </button>
                           </div>
-                          <table class="table table-hover" *ngIf="invoices.length">
+                          <table
+                            class="table table-hover"
+                            *ngIf="invoices.length"
+                          >
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
@@ -200,7 +220,7 @@
                               <tr
                                 *ngFor="let invoice of invoices; let i = index"
                               >
-                                <th scope="row">{{ i+1 }}</th>
+                                <th scope="row">{{ i + 1 }}</th>
                                 <td>{{ invoice.item.name }}</td>
                                 <td>{{ invoice.client.name }}</td>
                                 <td>{{ invoice.quantity }}</td>
@@ -214,127 +234,198 @@
                           <i class="icon-book-open"></i>Other Details
                         </h4>
                       </div>
-                        <div formGroupName="otherDetails">
-                          <div class="form-group row">
-                            <label
-                              class="col-md-3 label-control"
-                              for="projectinput9"
-                            >
-                              Bills Total
-                            </label>
-                            <div class="col-md-9">
-                              <input
-                                type="text"
-                                id="projectinput9"
-                                class="form-control"
-                                name="Type"
-                                formControlName="totalBills"
-                              />
-                            </div>
+                      <div formGroupName="otherDetails">
+                        <div class="form-group row">
+                          <label
+                            class="col-md-3 label-control"
+                            for="projectinput9"
+                          >
+                            Bills Total
+                          </label>
+                          <div class="col-md-9">
+                            <input
+                              type="text"
+                              id="projectinput9"
+                              class="form-control"
+                              name="Type"
+                              formControlName="totalBills"
+                            />
                           </div>
-                          <div class="form-group row">
-                            <label
-                              class="col-md-3 label-control"
-                              for="projectinput9"
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            class="col-md-3 label-control"
+                            for="projectinput9"
+                          >
+                            percentage discount
+                          </label>
+                          <div class="col-md-9">
+                            <input
+                              type="text"
+                              id="projectinput9"
+                              class="form-control"
+                              name="Type"
+                              formControlName="percentDiscount"
+                              (input)="onPercentageInput()"
+                              [disabled]="percentDisabled"
+                            />
+                            <span
+                              class="ml-2 help-block text-danger"
+                              *ngIf="(invoiceForm.get('otherDetails.percentDiscount').touched && invoiceForm.get('otherDetails.percentDiscount').errors?.['min'])
+                                      || (invoiceForm.get('otherDetails.percentDiscount').errors?.['min'] && percentActive)"
                             >
-                              percentage discount
-                            </label>
-                            <div class="col-md-9">
-                              <input
-                                type="text"
-                                id="projectinput9"
-                                class="form-control"
-                                name="Type"
-                                formControlName="percentDiscount"
-                                (input)="onPercentageInput()"
-                                [disabled]="percentDisabled"
-                              />
-                              <span class="ml-2 help-block text-danger"
-                                *ngIf="invoiceForm.get('otherDetails.percentDiscount').touched &&
-                                        invoiceForm.get('otherDetails.percentDiscount').errors?.['min']"
-                                > Percentage Discount can not be less than Zero
-                              </span>
-                                                            <span class="ml-2 help-block text-danger" *ngIf="invoiceForm.get('otherDetails.percentDiscount').touched &&
-                                        invoiceForm.get('otherDetails.percentDiscount').errors?.['max']"> Percentage Discount can not be greater than 100%
-                              </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="projectinput9">
-                              value discount
-                            </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="valueDiscount" (input)="onValueInput()" [disabled]="valueDisabled" />
-                                                            <span class="ml-2 help-block text-danger" *ngIf="invoiceForm.get('otherDetails.valueDiscount').touched &&
-                                        invoiceForm.get('otherDetails.valueDiscount').errors?.['min']"> Value Discount can not be less than Zero
-                              </span>
-                                                            <span class="ml-2 help-block text-danger" *ngIf="invoiceForm.get('otherDetails.valueDiscount').touched &&
-                                        invoiceForm.get('otherDetails.valueDiscount').errors?.['max']"> Value Discount can not be greater than total Bills
-                              </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="projectinput9">
-                              The Net
-                            </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="net" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="projectinput9">
-                              paid up
-                            </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="paidUp" (input)="onPaidUpInput()" />
-                                                            <span class="ml-2 help-block text-danger" *ngIf="invoiceForm.get('otherDetails.paidUp')?.touched &&
-                                        invoiceForm.get('otherDetails.paidUp')?.errors?.['min']"> Paid up value can not be less than Zero
-                              </span>
-                                                            <span class="ml-2 help-block text-danger" *ngIf="invoiceForm.get('otherDetails.paidUp')?.touched &&
-                                        invoiceForm.get('otherDetails.paidUp')?.errors?.['max']"> Paid up value can not be greater than the net
-                              </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="projectinput9">
-                              The rest
-                            </label>
-                                                        <div class="col-md-9">
-                                                            <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="rest" />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                              Percentage Discount can not be less than Zero
+                            </span>
+                            <span
+                              class="ml-2 help-block text-danger"
+                              *ngIf="(invoiceForm.get('otherDetails.percentDiscount').touched &&
+                                        invoiceForm.get('otherDetails.percentDiscount').errors?.['max'])
+                                        || (invoiceForm.get('otherDetails.percentDiscount').errors?.['max'] && percentActive)"
+                            >
+                              Percentage Discount can not be greater than 100%
+                            </span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            class="col-md-3 label-control"
+                            for="projectinput9"
+                          >
+                            value discount
+                          </label>
+                          <div class="col-md-9">
+                            <input
+                              type="text"
+                              id="projectinput9"
+                              class="form-control"
+                              name="Type"
+                              formControlName="valueDiscount"
+                              (input)="onValueInput()"
+                              [disabled]="valueDisabled"
+                            />
+                            <span
+                              class="ml-2 help-block text-danger"
+                              *ngIf="(invoiceForm.get('otherDetails.valueDiscount').touched &&
+                                        invoiceForm.get('otherDetails.valueDiscount').errors?.['min'])||
+                                        (invoiceForm.get('otherDetails.valueDiscount').errors?.['min'] && valueActive)"
+                            >
+                              Value Discount can not be less than Zero
+                            </span>
+                            <span
+                              class="ml-2 help-block text-danger"
+                              *ngIf="(invoiceForm.get('otherDetails.valueDiscount').touched &&
+                                        invoiceForm.get('otherDetails.valueDiscount').errors?.['max']) ||
+                                        (invoiceForm.get('otherDetails.valueDiscount').errors?.['max'] && valueActive)"
+                            >
+                              Value Discount can not be greater than total Bills
+                            </span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            class="col-md-3 label-control"
+                            for="projectinput9"
+                          >
+                            The Net
+                          </label>
+                          <div class="col-md-9">
+                            <input
+                              type="text"
+                              id="projectinput9"
+                              class="form-control"
+                              name="Type"
+                              formControlName="net"
+                            />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            class="col-md-3 label-control"
+                            for="projectinput9"
+                          >
+                            paid up
+                          </label>
+                          <div class="col-md-9">
+                            <input
+                              type="text"
+                              id="projectinput9"
+                              class="form-control"
+                              name="Type"
+                              formControlName="paidUp"
+                              (input)="onPaidUpInput()"
+                            />
+                            <span
+                              class="ml-2 help-block text-danger"
+                              *ngIf="(invoiceForm.get('otherDetails.paidUp')?.touched &&
+                                        invoiceForm.get('otherDetails.paidUp')?.errors?.['min']) ||
+                                        (invoiceForm.get('otherDetails.paidUp')?.errors?.['min'] && paidUpActive)"
+                            >
+                              Paid up value can not be less than Zero
+                            </span>
+                            <span
+                              class="ml-2 help-block text-danger"
+                              *ngIf="(invoiceForm.get('otherDetails.paidUp')?.touched &&
+                                        invoiceForm.get('otherDetails.paidUp')?.errors?.['max']) ||
+                                        ((invoiceForm.get('otherDetails.paidUp')?.errors?.['max'] && paidUpActive))"
+                            >
+                              Paid up value can not be greater than the net
+                            </span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label
+                            class="col-md-3 label-control"
+                            for="projectinput9"
+                          >
+                            The rest
+                          </label>
+                          <div class="col-md-9">
+                            <input
+                              type="text"
+                              id="projectinput9"
+                              class="form-control"
+                              name="Type"
+                              formControlName="rest"
+                            />
+                          </div>
+                        </div>
+                      </div>
 
-                                                <div class="form-actions">
-                                                    <button type="button" class="btn btn-danger mr-1">
+                      <div class="form-actions">
+                        <button type="button" class="btn btn-danger mr-1">
                           <i class="icon-trash"></i> Cancel
                         </button>
-                                                    <button type="submit" class="btn btn-success" (click)="{popup}">
+                        <button
+                          type="submit"
+                          class="btn btn-success"
+                          (click)="{popup}"
+                        >
                           <i class="icon-note"></i> Save
                         </button>
-                                                </div>
-                                        </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </section>
+                      </div>
+                    </form>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="overlay" *ngIf="popup">
-                <div class="popup">
-                    <h2>saved</h2>
-                    <a class="close" (click)="popup = false">&times;</a>
-                    <div class="content">
-                        <img src="assets/img/saved.png" style="width: 200px" />
-                    </div>
-                </div>
-            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="overlay" *ngIf="popup">
+      <div class="popup">
+        <h2>saved</h2>
+        <a class="close" (click)="popUp()">&times;</a>
+        <div class="content">
+          <img src="assets/img/saved.png" style="width: 200px" />
         </div>
-        <footer class="footer footer-static footer-light">
-            <p class="clearfix text-muted text-center px-2">
-                <span>Copyright &copy; 2022
+      </div>
+    </div>
+  </div>
+  <footer class="footer footer-static footer-light">
+    <p class="clearfix text-muted text-center px-2">
+      <span
+        >Copyright &copy; 2022
         <a
           href="#"
           id="pixinventLink"
@@ -343,6 +434,6 @@
           >Pioneer-solutions</a
         >, All rights reserved.
       </span>
-            </p>
-        </footer>
-    </div>
+    </p>
+  </footer>
+</div>
