@@ -156,7 +156,7 @@
                               <span
                                 class="ml-2 help-block text-danger"
                                 *ngIf="(invoiceForm.get('invoice.Quantity').touched && invoiceForm.get('invoice.Quantity').errors?.['quantityError']) || (invoiceForm.get('invoice.Quantity').errors?.['quantityError'] && quantityActive)"
-                                >Unsufficient Quantity in the stock</span
+                                >Remaining Quantity: {{remainquantity}}</span
                               >
                             </div>
                           </div>
