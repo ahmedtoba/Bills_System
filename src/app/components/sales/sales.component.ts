@@ -247,7 +247,22 @@ export class SalesComponent implements OnInit {
 
   popUp(){
     this.popup = false;
-    window.location.reload()
+    this.isAdded = false;
+    this.cancel();
+  }
+
+
+  cancel(){
+    this.invoiceForm.get('invoice').reset();
+    this.invoiceForm.get('otherDetails').reset({
+      totalBills: 0,
+      percentDiscount: 0,
+      valueDiscount: 0,
+      net: null,
+      paidUp: 0,
+      'rest': null
+    });
+    this.ngOnInit();
   }
 
 }
