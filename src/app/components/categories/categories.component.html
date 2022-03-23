@@ -62,7 +62,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 label-control" for="buyingPrice">buying Price : </label>
                                                 <div class="col-md-9">
-                                                    <input type="number" id="buyingPrice" class="form-control" name="Type" formControlName="buyingPrice" (input)="buyingPriceActive = true">
+                                                    <input type="number" id="buyingPrice" class="form-control" name="Type" formControlName="buyingPrice" (input)="checkPrice()" (input)="buyingPriceActive = true">
                                                     <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('required')) || (categoryForm.get('buyingPrice').hasError('required') && isSubmitted && categoryForm.get('buyingPrice').untouched)">Buying price is required</span><br>
                                                     <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('min')) || (categoryForm.get('buyingPrice').hasError('required') && buyingPriceActive)">Buying price cannot be less than Zero</span>
                                                 </div>

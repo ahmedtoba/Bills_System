@@ -31,6 +31,7 @@ export class CategoriesComponent implements OnInit {
   buyingPriceActive = false
   sellingPriceActive = false
   quantityActive = false
+  checkprice=false
 
   categoryForm:FormGroup=new FormGroup({
     'company': new FormControl(null, [Validators.required]),
@@ -106,6 +107,9 @@ export class CategoriesComponent implements OnInit {
       return {'priceError': true}
     return null;
   }
-
+  checkPrice(){
+    if(this.categoryForm.value.buyingPrice>this.categoryForm.value.sellingPrice&&this.categoryForm.value.sellingPrice)
+this.checkprice=true
+  }
 
 }
