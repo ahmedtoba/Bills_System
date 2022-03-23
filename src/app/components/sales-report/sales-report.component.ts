@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TotalBill } from 'src/app/models/total-bill.model';
 import { TotalBillsService } from 'src/app/Services/total-bills.service';
 
+
 @Component({
   selector: 'app-sales-report',
   templateUrl: './sales-report.component.html',
@@ -16,7 +17,6 @@ export class SalesReportComponent implements OnInit {
   dateForm : FormGroup;
   reportsFound = true;
   submitted = false;
-  check=false
   constructor(private billsService: TotalBillsService) { }
 
   ngOnInit(): void {
@@ -28,29 +28,24 @@ export class SalesReportComponent implements OnInit {
     this.billsService.getAll().subscribe(
       data => this.reports = data
     )
-
   }
 
   getReports(){
+    this.filteredReports=[]
 if(this.dateForm.valid){
     for (let report of this.reports){
 
-
-      if (report.date >= this.dateForm.value.startDate && report.date <= this.dateForm.value.endDate){
+      if (report.date  >= this.dateForm.value.startDate&& report.date.toString().split("T")[0]  <= this.dateForm.value.endDate){
         this.filteredReports.push(report)
       }
     }
-
     if (this.filteredReports.length)
       this.reportsFound = true;
     else this.reportsFound = false;
-
-
   }
-
   this.submitted = true;
-
   }
+
   checkEndDate(control:FormControl):{[msg:string]:boolean}{
     if(control.value<this.dateForm?.value.startDate)
     return {'check':true}
@@ -58,10 +53,9 @@ if(this.dateForm.valid){
     }
 
     resetEndDate(){
-      this.dateForm.patchValue({
 
-        endDate:{value:null}
-      })
+this.dateForm.controls['endDate'].reset()
+      this.submitted = false;
     }
   reset(){
     this.dateForm.reset();
