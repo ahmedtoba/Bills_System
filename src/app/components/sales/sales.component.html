@@ -147,11 +147,17 @@
                                 name="lname"
                                 (input)="TotalPrice()"
                                 formControlName="Quantity"
+                                (input)="quantityActive=true"
                               />
                               <span
                                 class="ml-2 help-block text-danger"
                                 *ngIf="(invoiceForm.get('invoice.Quantity').touched && invoiceForm.get('invoice.Quantity').errors?.['required']) || (invoiceForm.get('invoice.Quantity').errors?.['required'] && isAdded)"
                                 >Quantity is required</span
+                              >
+                              <span
+                                class="ml-2 help-block text-danger"
+                                *ngIf="(invoiceForm.get('invoice.Quantity').touched && invoiceForm.get('invoice.Quantity').errors?.['min']) || (invoiceForm.get('invoice.Quantity').errors?.['required'] && quantityActive)"
+                                >Quantity can't be less than 1</span
                               >
                               <span
                                 class="ml-2 help-block text-danger"
