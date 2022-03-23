@@ -27,12 +27,16 @@ export class CategoriesComponent implements OnInit {
   name = 'Angular';
   //---------
   isSubmitted = false
+  nameActive = false
+  buyingPriceActive = false
+  sellingPriceActive = false
+  quantityActive = false
 
   categoryForm:FormGroup=new FormGroup({
     'company': new FormControl(null, [Validators.required,]),
     'type':new FormControl(null, [Validators.required]),
     'unit': new FormControl(null, [Validators.required]),
-    'name': new FormControl(null, [Validators.required]),
+    'name': new FormControl(null, [Validators.required, this.nameIsUnique.bind(this)]),
     'quantity': new FormControl(null, [Validators.required, Validators.min(1)]),
     'buyingPrice': new FormControl(null, [Validators.required, Validators.min(0)]),
     'sellingPrice': new FormControl(null, [Validators.required, Validators.min(0), this.sellingGreaterThanBuying.bind(this)]),
@@ -74,9 +78,15 @@ export class CategoriesComponent implements OnInit {
         initialQuantity: this.categoryForm.value.quantity,
         remainingQuantity: this.categoryForm.value.quantity
       }).subscribe(
-        data => console.log(data)
+        data => {this.popup=true
+            this.isSubmitted = false
+            this.nameActive = false
+            this.buyingPriceActive = false
+            this.sellingPriceActive = false
+            this.quantityActive = false
+        },
         )
-        this.popup=true
+      this.categoryForm.reset()
     }
     console.log(this.categoryForm)
   }

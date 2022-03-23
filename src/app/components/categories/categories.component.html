@@ -18,22 +18,22 @@
                                     <div class="px-3">
                                         <form class="form form-horizontal" [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput7">Company Name: </label>
+                                                <label class="col-md-3 label-control" for="company">Company Name: </label>
                                                 <div class="col-md-9">
-                                                    <select id="projectinput7" name="budget" class="form-control" formControlName="company">
+                                                    <select id="company" name="budget" class="form-control" formControlName="company">
 
                                                   <option [value]="null" selected="" disabled="">choose from Companies</option>
                                                   <option [value]="company.id" *ngFor="let company of companies">{{company.name}}</option>
 
                                               </select>
-                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('company').touched && categoryForm.get('company').hasError('required')) || (categoryForm.get('company').untouched && isSubmitted)">company name is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('company').touched && categoryForm.get('company').hasError('required')) || (categoryForm.get('company').hasError('required') && isSubmitted)">company name is required</span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput7">Species Name: </label>
+                                                <label class="col-md-3 label-control" for="type">Species Name: </label>
                                                 <div class="col-md-9">
 
-                                                    <select id="projectinput7" name="budget" class="form-control" formControlName="type">
+                                                    <select id="type" name="budget" class="form-control" formControlName="type">
                                                   <option [value]="null"  selected="" disabled="">choose from Species</option>
                                                   <option [value]="cType.typeId" *ngFor="let cType of companyTypes | filterByCompany : categoryForm.value.company">{{cType['type'].name}}</option>
                                               </select>
@@ -41,51 +41,51 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">Unit Name : </label>
+                                                <label class="col-md-3 label-control" for="unit">Unit Name : </label>
                                                 <div class="col-md-9">
-                                                    <select id="projectinput7" name="budget" class="form-control" formControlName="unit">
+                                                    <select id="unit" name="budget" class="form-control" formControlName="unit">
                                                   <option [value]="null" selected="" disabled="">choose from Units</option>
                                                   <option [value]="unit.id" *ngFor="let unit of units">{{unit.name}}</option>
                                                 </select>
-                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('unit').touched && categoryForm.get('unit').hasError('required')) || (categoryForm.get('unit').untouched && isSubmitted)">unit name is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('unit').touched && categoryForm.get('unit').hasError('required')) || (categoryForm.get('unit').hasError('required') && isSubmitted)">unit name is required</span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">Item Name
+                                                <label class="col-md-3 label-control" for="itemName">Item Name
                                                 : </label>
                                                 <div class="col-md-9">
-                                                    <input type="text" id="projectinput9" class="form-control" name="Type" formControlName="name">
-                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('name').touched && categoryForm.get('name').hasError('required')) || (categoryForm.get('name').untouched && isSubmitted)">Item name is required</span>
-                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('name').touched && categoryForm.get('name').hasError('exists')">Item name already exists</span>
+                                                    <input type="text" id="itemName" class="form-control" name="Type" formControlName="name" (input)="nameActive= true">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('name').touched && categoryForm.get('name').hasError('required')) || (categoryForm.get('name').hasError('required') && isSubmitted)">Item name is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('name').touched && categoryForm.get('name').hasError('exists')) || (categoryForm.get('name').hasError('exists') && nameActive)">Item name already exists</span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">buying Price : </label>
+                                                <label class="col-md-3 label-control" for="buyingPrice">buying Price : </label>
                                                 <div class="col-md-9">
-                                                    <input type="number" id="projectinput9" class="form-control" name="Type" formControlName="buyingPrice">
-                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('required')) || (categoryForm.get('buyingPrice').untouched && isSubmitted)">Buying price is required</span>
-                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('min')">Buying price cannot be less than Zero</span>
+                                                    <input type="number" id="buyingPrice" class="form-control" name="Type" formControlName="buyingPrice" (input)="buyingPriceActive = true">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('required')) || (categoryForm.get('buyingPrice').hasError('required') && isSubmitted)">Buying price is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('buyingPrice').touched && categoryForm.get('buyingPrice').hasError('min')) || (categoryForm.get('buyingPrice').hasError('required') && buyingPriceActive)">Buying price cannot be less than Zero</span>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">selling price
+                                                <label class="col-md-3 label-control" for="sellingPrice">selling price
                                                   : </label>
                                                 <div class="col-md-9">
-                                                    <input type="number" id="projectinput9" class="form-control" name="Type" formControlName="sellingPrice">
-                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('required')) || (categoryForm.get('sellingPrice').untouched && isSubmitted)">Selling price is required</span>
-                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('priceError')">Selling price cannot be less than Buying price</span>
-                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('min')">selling price cannot be less than Zero</span>
+                                                    <input type="number" id="sellingPrice" class="form-control" name="Type" formControlName="sellingPrice" (input)="sellingPriceActive=true">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('required')) || (categoryForm.get('sellingPrice').hasError('required') && isSubmitted)">Selling price is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('priceError')) || (categoryForm.get('sellingPrice').hasError('priceError') && sellingPriceActive)">Selling price cannot be less than Buying price</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('min')) || (categoryForm.get('sellingPrice').hasError('min') && sellingPriceActive)">selling price cannot be less than Zero</span>
 
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput9">Quantity
+                                                <label class="col-md-3 label-control" for="quantity">Quantity
                                                   : </label>
                                                 <div class="col-md-9">
-                                                    <input type="number" id="projectinput9" class="form-control" name="Type" formControlName="quantity">
-                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('quantity').touched && categoryForm.get('quantity').hasError('required')) || (categoryForm.get('quantity').untouched && isSubmitted)">Quantity is required</span>
-                                                    <span class="ml-2 help-block text-danger" *ngIf="categoryForm.get('quantity').touched && categoryForm.get('quantity').hasError('min')">Quanity must be greater than zero</span>
+                                                    <input type="number" id="quantity" class="form-control" name="Type" formControlName="quantity" (input)="quantityActive=true">
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('quantity').touched && categoryForm.get('quantity').hasError('required')) || (categoryForm.get('quantity').hasError('required') && isSubmitted)">Quantity is required</span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('quantity').touched && categoryForm.get('quantity').hasError('min')) || (categoryForm.get('quantity').hasError('min') && quantityActive)">Quanity must be greater than zero</span>
 
                                                 </div>
                                             </div>
