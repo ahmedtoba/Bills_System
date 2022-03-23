@@ -21,9 +21,9 @@
                                                 <label class="col-md-3 label-control" for="projectinput7">Choose a period
                                               : </label>
                                                 <div class="col-md-9">
-                                                    <input type="date" id="projectinput7" name="budget" formControlName="startDate" class="form-control" (input)="reportsFound = true">
+                                                    <input type="date" id="projectinput7" name="budget" formControlName="startDate" class="form-control" (input)="resetEndDate()"  (input)="reportsFound = true ">
                                                     <span class="ml-2 help-block text-danger" *ngIf="(dateForm.get('startDate').touched && dateForm.get('startDate').errors?.['required']) ||
-                                                      (submitted && dateForm.get('endDate').errors?.['required'])">
+                                                      (submitted && dateForm.get('startDate').errors?.['required'])">
                                                       Choose Start Date
                                                     </span>
                                                 </div>
@@ -32,18 +32,27 @@
                                                 <label class="col-md-3 label-control" for="projectinput8">Choose a period
                                               : </label>
                                                 <div class="col-md-9">
-                                                    <input type="date" id="projectinput8" name="budget" formControlName="endDate" class="form-control" (input)="reportsFound = true">
+                                                    <input type="date" id="projectinput8" name="budget" formControlName="endDate" class="form-control"   (input)="reportsFound = true">
                                                     <span class="ml-2 help-block text-danger" *ngIf="(dateForm.get('endDate').touched && dateForm.get('endDate').errors?.['required']) ||
                                                     (submitted && dateForm.get('endDate').errors?.['required'])">
                                                     Choose End Date
                                                   </span>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="( dateForm.get('endDate').errors?.['check'])
+                                                    ">
+                                                    Choose Valid End Date
+                                                  </span>
+
                                                 </div>
                                             </div>
 
                                             <div class="form-actions">
+                                              <button type="button" class="btn btn-danger mr-1" (click)="reset()">
+                                                <i class="icon-note"></i> reset
+                                              </button>
                                                 <button type="submit" class="btn btn-success">
                                                   <i class="icon-note"></i> Get All Reports
                                                 </button>
+
                                             </div>
                                             <table class="table table-hover" *ngIf="filteredReports.length">
                                                 <thead class="table-info">

@@ -33,7 +33,7 @@ export class CategoriesComponent implements OnInit {
   quantityActive = false
 
   categoryForm:FormGroup=new FormGroup({
-    'company': new FormControl(null, [Validators.required,]),
+    'company': new FormControl(null, [Validators.required]),
     'type':new FormControl(null, [Validators.required]),
     'unit': new FormControl(null, [Validators.required]),
     'name': new FormControl(null, [Validators.required, this.nameIsUnique.bind(this)]),
@@ -79,6 +79,7 @@ export class CategoriesComponent implements OnInit {
         remainingQuantity: this.categoryForm.value.quantity
       }).subscribe(
         data => {this.popup=true
+          this.categoryForm.reset()
             this.isSubmitted = false
             this.nameActive = false
             this.buyingPriceActive = false
@@ -86,7 +87,6 @@ export class CategoriesComponent implements OnInit {
             this.quantityActive = false
         },
         )
-      this.categoryForm.reset()
     }
     console.log(this.categoryForm)
   }

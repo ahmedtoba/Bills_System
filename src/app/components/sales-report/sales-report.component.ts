@@ -16,12 +16,13 @@ export class SalesReportComponent implements OnInit {
   dateForm : FormGroup;
   reportsFound = true;
   submitted = false;
+  check=false
   constructor(private billsService: TotalBillsService) { }
 
   ngOnInit(): void {
     this.dateForm = new FormGroup({
       'startDate' : new FormControl(null, Validators.required),
-      'endDate' : new FormControl(null, Validators.required)
+      'endDate' : new FormControl(null,[ Validators.required,this.checkEndDate.bind(this)])
     })
 
     this.billsService.getAll().subscribe(
@@ -31,7 +32,10 @@ export class SalesReportComponent implements OnInit {
   }
 
   getReports(){
+if(this.dateForm.valid){
     for (let report of this.reports){
+
+
       if (report.date >= this.dateForm.value.startDate && report.date <= this.dateForm.value.endDate){
         this.filteredReports.push(report)
       }
@@ -41,6 +45,27 @@ export class SalesReportComponent implements OnInit {
       this.reportsFound = true;
     else this.reportsFound = false;
 
-    this.submitted = true;
+
   }
+
+  this.submitted = true;
+
+  }
+  checkEndDate(control:FormControl):{[msg:string]:boolean}{
+    if(control.value<this.dateForm?.value.startDate)
+    return {'check':true}
+    return null
+    }
+
+    resetEndDate(){
+      this.dateForm.patchValue({
+
+        endDate:{value:null}
+      })
+    }
+  reset(){
+    this.dateForm.reset();
+    this.submitted = false;
+  }
+
 }
