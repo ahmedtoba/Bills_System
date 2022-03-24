@@ -131,6 +131,11 @@
                                 *ngIf="(invoiceForm.get('invoice.Sell').touched && invoiceForm.get('invoice.Sell').errors?.['required']) || (invoiceForm.get('invoice.Sell').errors?.['required'] && isAdded )"
                                 >Selling Price is required</span
                               >
+                              <span
+                              class="ml-2 help-block text-danger"
+                              *ngIf="(invoiceForm.get('invoice.Sell').touched && invoiceForm.get('invoice.Sell').errors?.['min']) || (invoiceForm.get('invoice.Sell').errors?.['required']&&sellingprice )"
+                              >Sell Price can't be less than 0</span
+                            >
                             </div>
                           </div>
                           <div class="form-group row">
@@ -327,9 +332,9 @@
                                                 </div>
 
                                                 <div class="form-actions">
-                                                    <button type="button" (click)="cancel()" class="btn btn-danger mr-1">
+                                                    <!-- <button type="button" (click)="cancel()" class="btn btn-danger mr-1">
                           <i class="icon-trash"></i> Cancel
-                        </button>
+                        </button> -->
                                                     <button type="submit" class="btn btn-success" (click)="{popup}">
                           <i class="icon-note"></i> Save
                         </button>

@@ -72,9 +72,9 @@
                                                 <label class="col-md-3 label-control" for="sellingPrice">selling price
                                                   : </label>
                                                 <div class="col-md-9">
-                                                    <input type="number" id="sellingPrice" class="form-control" name="Type" formControlName="sellingPrice" (input)="sellingPriceActive=true">
+                                                    <input type="number" id="sellingPrice" class="form-control" name="Type" formControlName="sellingPrice" (input)="checkPrice()" (input)="sellingPriceActive=true">
                                                     <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('required')) || (categoryForm.get('sellingPrice').hasError('required') && isSubmitted && categoryForm.get('sellingPrice').untouched)">Selling price is required</span>
-                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('priceError')) || (categoryForm.get('sellingPrice').hasError('priceError') && sellingPriceActive)">Selling price cannot be less than Buying price</span><br>
+                                                    <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('priceError')) || (categoryForm.get('sellingPrice').hasError('priceError') && sellingPriceActive||checkprice)">Selling price cannot be less than Buying price</span><br>
                                                     <span class="ml-2 help-block text-danger" *ngIf="(categoryForm.get('sellingPrice').touched && categoryForm.get('sellingPrice').hasError('min')) || (categoryForm.get('sellingPrice').hasError('min') && sellingPriceActive)">selling price cannot be less than Zero</span>
 
                                                 </div>

@@ -23,11 +23,11 @@
                                                 <div class="col-md-9">
                                                     <select id="projectinput7" (change)="GetData()" name="budget" class="form-control" formControlName="item">
                                                   <option [value]="null" selected="" disabled="">Chose Item</option>
-                                                  <option [value]="item.id" *ngFor="let item of items" >{{item.name}}</option>
+                                                  <option [value]="item.id" *ngFor="let item of items">{{item.name}}</option>
                                               </select>
                                                     <br>
                                                 </div>
-                                                <table class="table text-center" *ngIf="itemTable.length">
+                                                <table class="table text-center" *ngIf="itemTable?.length">
                                                     <thead class="table-info">
                                                         <tr>
                                                             <th scope="col">#</th>
@@ -47,7 +47,7 @@
                                                     </tbody>
                                                 </table>
                                                 <div class="text-center">
-                                                    <span class="text-center" *ngIf="!itemTable.length">
+                                                    <span class="text-center" *ngIf="!itemTable?.length">
                                                       <img src="assets/img/nosearchresult.png" style="width: 300px; margin-left:100%;">
                                                   </span>
                                                 </div>

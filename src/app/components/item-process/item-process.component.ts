@@ -16,22 +16,18 @@ export class ItemProcessComponent implements OnInit {
   })
 items:Item[]=[]
 itemTable:Invoice[]
-id:number=0
   constructor(private ItemService:CategoryService,private invoiceService:InvoiceService) { }
 
   ngOnInit(): void {
     this.ItemService.GetAll().subscribe(
       data => this.items = data
+
     );
   }
    GetData(){
      this.invoiceService.getByItemId(this.Form.value.item).subscribe(
    (response)=>{this.itemTable=response
-  }
-
- );
-
-
+  });
   }
 
 }
