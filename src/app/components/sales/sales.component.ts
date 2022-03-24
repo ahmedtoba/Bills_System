@@ -51,7 +51,7 @@ export class SalesComponent implements OnInit {
       'Client':new FormControl(null,[Validators.required]),
       'Item':new FormControl(null,[Validators.required]),
       'Quantity':new FormControl({value:null, disabled: true},[Validators.required,this.CheckQuantity.bind(this), Validators.min(1)]),
-      'Sell':new FormControl({value:null, disabled: true},[Validators.required]),
+      'Sell':new FormControl({value:null, disabled: true},[Validators.required,Validators.min(0)]),
       'Number':new FormControl({value: null, disabled: true}),
       'Total': new FormControl({value:null, disabled:true})
     }),

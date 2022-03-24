@@ -110,6 +110,9 @@ export class CategoriesComponent implements OnInit {
   checkPrice(){
     if(this.categoryForm.value.buyingPrice>this.categoryForm.value.sellingPrice&&this.categoryForm.value.sellingPrice)
 this.checkprice=true
+else{
+  this.checkprice=false
+}
   }
 
 }
