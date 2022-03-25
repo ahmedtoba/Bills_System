@@ -6,7 +6,7 @@ ASP.NET Core WEB API Link: https://github.com/ahmedtoba/Bills_System_API
 
 # Project Video
 
-https://github.com/ahmedtoba/Bills_System/issues/21#issue-1180936975
+https://user-images.githubusercontent.com/20687611/160151257-c1499f2c-28b0-4771-b287-7398998a8653.mp4
 
 ## Development server
 
